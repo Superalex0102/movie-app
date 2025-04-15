@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		D67ADAAB2DAA65DE00DEDCF1 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = D67ADAAA2DAA65DE00DEDCF1 /* CombineMoya */; };
 		D67ADAAD2DAA65DE00DEDCF1 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = D67ADAAC2DAA65DE00DEDCF1 /* Moya */; };
+		D6EC33AA2DAE853900961270 /* InjectPropertyWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = D6EC33A92DAE853900961270 /* InjectPropertyWrapper */; };
+		D6EC33AD2DAE854E00961270 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = D6EC33AC2DAE854E00961270 /* Swinject */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,8 @@
 			files = (
 				D67ADAAD2DAA65DE00DEDCF1 /* Moya in Frameworks */,
 				D67ADAAB2DAA65DE00DEDCF1 /* CombineMoya in Frameworks */,
+				D6EC33AA2DAE853900961270 /* InjectPropertyWrapper in Frameworks */,
+				D6EC33AD2DAE854E00961270 /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +91,8 @@
 			packageProductDependencies = (
 				D67ADAAA2DAA65DE00DEDCF1 /* CombineMoya */,
 				D67ADAAC2DAA65DE00DEDCF1 /* Moya */,
+				D6EC33A92DAE853900961270 /* InjectPropertyWrapper */,
+				D6EC33AC2DAE854E00961270 /* Swinject */,
 			);
 			productName = "movie-app";
 			productReference = D6833DBD2DA51949001C4548 /* movie-app.app */;
@@ -119,6 +125,8 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				D67ADAA92DAA65DE00DEDCF1 /* XCRemoteSwiftPackageReference "Moya" */,
+				D6EC33A82DAE853900961270 /* XCRemoteSwiftPackageReference "InjectPropertyWrapper" */,
+				D6EC33AB2DAE854E00961270 /* XCRemoteSwiftPackageReference "Swinject" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D6833DBE2DA51949001C4548 /* Products */;
@@ -225,7 +233,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "movie-app/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "movie-app debug DEV";
+				INFOPLIST_KEY_CFBundleDisplayName = "movie-app debug prod";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -313,7 +321,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "movie-app/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "movie-app debug DEV";
+				INFOPLIST_KEY_CFBundleDisplayName = "movie-app PROD";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -495,7 +503,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "movie-app/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "movie-app debug DEV";
+				INFOPLIST_KEY_CFBundleDisplayName = "movie-app DEV";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -589,7 +597,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "movie-app/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "movie-app debug DEV";
+				INFOPLIST_KEY_CFBundleDisplayName = "movie-app debug TV";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -678,7 +686,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "movie-app/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "movie-app debug DEV";
+				INFOPLIST_KEY_CFBundleDisplayName = "movie-app TV";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -739,6 +747,22 @@
 				minimumVersion = 15.0.3;
 			};
 		};
+		D6EC33A82DAE853900961270 /* XCRemoteSwiftPackageReference "InjectPropertyWrapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/egeniq/InjectPropertyWrapper";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.0;
+			};
+		};
+		D6EC33AB2DAE854E00961270 /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.9.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -751,6 +775,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D67ADAA92DAA65DE00DEDCF1 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		D6EC33A92DAE853900961270 /* InjectPropertyWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D6EC33A82DAE853900961270 /* XCRemoteSwiftPackageReference "InjectPropertyWrapper" */;
+			productName = InjectPropertyWrapper;
+		};
+		D6EC33AC2DAE854E00961270 /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D6EC33AB2DAE854E00961270 /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
