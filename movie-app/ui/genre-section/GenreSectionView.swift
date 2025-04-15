@@ -15,7 +15,9 @@ class GenreSectionViewModel: ObservableObject {
     func fetchGenres() async {
         do {
             let request = FetchGenreRequest()
-            let genres = try await movieService.fetchGenres(req: request)
+            let genres = Environment.name == .tv ?
+                try await movieService.fetchGenres(req: request) :
+                try await movieService.fetchTVGenres(req: request)
             DispatchQueue.main.async {
                 self.genres = genres
             }
