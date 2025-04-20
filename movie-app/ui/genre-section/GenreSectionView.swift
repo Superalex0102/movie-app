@@ -39,41 +39,46 @@ struct GenreSectionView: View {
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            GeometryReader { geometry in
-                Image(.ellipse)
-                    .resizable()
-                    .frame(width: 449, height: 449)
-                    .position(x: geometry.size.width - 205, y: 225)
-            }
-            
             NavigationView {
-                List(viewModel.genres) { genre in
-                    ZStack {
-                        NavigationLink(destination: MovieListView(genre: genre)) {
-                            EmptyView()
+                ZStack {
+                    List(viewModel.genres) { genre in
+                        ZStack {
+                            NavigationLink(destination: MovieListView(genre: genre)) {
+                                EmptyView()
+                            }
+                            .opacity(0)
+                            
+                            HStack {
+                                Text(genre.name)
+                                    .font(Fonts.title)
+                                    .foregroundStyle(Color.primary)
+                                Spacer()
+                                Image(.rightArrow)
+                            }
                         }
-                        .opacity(0)
-                        
-                        HStack {
-                            Text(genre.name)
-                                .font(Fonts.title)
-                                .foregroundStyle(Color.primary)
-                            Spacer()
-                            Image(.rightArrow)
-                        }
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
                     }
-                    .listRowBackground(Color.clear)
-                    .listRowSeparator(.hidden)
+                    .background(Color.clear)
+                    .listStyle(.plain)
+                    .navigationTitle(Environment.name == .dev ? "DEV" : "PROD")
                 }
-                .background(Color.clear)
-                .listStyle(.plain)
-                .navigationTitle(Environment.name == .dev ? "DEV" : "PROD")
             }
             .onAppear {
                 Task {
                     await viewModel.fetchGenres()
                 }
             }
+            
+            //TODO: Ellipse hides part of the text
+            GeometryReader { geometry in
+                Image(.ellipse)
+                    .resizable()
+                    .frame(width: 400, height: 400)
+                    .position(x: geometry.size.width - 50, y: 50)
+                    .padding()
+            }
+            .ignoresSafeArea()
         }
         .ignoresSafeArea()
     }
