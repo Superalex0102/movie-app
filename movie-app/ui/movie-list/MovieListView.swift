@@ -1,3 +1,9 @@
+//
+//  MovieListView.swift
+//  movie-app-live
+//
+//  Created by Zsolt Pete on 2025. 04. 15..
+//
 
 import SwiftUI
 import InjectPropertyWrapper
@@ -74,19 +80,18 @@ struct MovieCellView: View {
                                 ProgressView()
                             }
 
-                        case .success(let image):
+                        case let .success(image):
                             image
                                 .resizable()
                                 .scaledToFill()
 
-                        case .failure:
+                        case .failure(let error):
                             ZStack {
                                 Color.red.opacity(0.3)
                                 Image(systemName: "photo")
                                     .foregroundColor(.white)
                             }
-
-                        default:
+                        @unknown default:
                             EmptyView()
                         }
                     }
@@ -120,4 +125,9 @@ struct MovieCellView: View {
             Spacer()
         }
     }
+}
+
+
+#Preview {
+    MovieListView(genre: Genre(id: 28, name: "Action") )
 }
