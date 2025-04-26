@@ -11,6 +11,8 @@ import SwiftUI
 struct movie_appApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
+//    @State var selectedTab: TabType = TabType.search
+    
     var body: some Scene {
         WindowGroup {
             MovieListView(genre: Genre(id: 28, name: "Action"))
