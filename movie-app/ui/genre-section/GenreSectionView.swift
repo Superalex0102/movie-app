@@ -38,11 +38,6 @@ struct GenreSectionView: View {
                 .listStyle(.plain)
                 .navigationTitle(Environment.name == .dev ? "DEV" : "PROD")
             }
-            .onAppear {
-                Task {
-                    await viewModel.fetchGenres()
-                }
-            }
             .alert(item: $viewModel.alertModel) { model in
                 return Alert(
                     title: Text(model.title),

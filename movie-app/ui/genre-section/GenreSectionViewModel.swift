@@ -7,6 +7,7 @@
 
 import Foundation
 import InjectPropertyWrapper
+import Combine
 
 protocol ErrorViewModelProtocol {
     var alertModel: AlertModel? { get }
@@ -14,30 +15,31 @@ protocol ErrorViewModelProtocol {
 
 protocol GenreSectionViewModelProtocol: ObservableObject {
     var genres: [Genre] { get }
-    func fetchGenres() async
 }
 
 class GenreSectionViewModel: GenreSectionViewModelProtocol, ErrorViewModelProtocol {
     @Published var genres: [Genre] = []
     @Published var alertModel: AlertModel? = nil
     
+    private var cancellables = Set<AnyCancellable>()
+    
     @Inject
     private var movieService: MoviesServiceProtocol
     
-    func fetchGenres() async {
-        do {
-            let request = FetchGenreRequest()
-            let genres = Environment.name == .tv ? try await movieService.fetchTVGenres(req: request) :
-                                                    try await movieService.fetchGenres(req: request)
-            DispatchQueue.main.async {
-                self.genres = genres
-            }
-        } catch {
-            DispatchQueue.main.async {
-                self.alertModel = self.toAlerModel(error)
-            }
-        }
-    }
+//    func fetchGenres() async {
+//        do {
+//            let request = FetchGenreRequest()
+//            let genres = Environment.name == .tv ? try await movieService.fetchTVGenres(req: request) :
+//                                                    try await movieService.fetchGenres(req: request)
+//            DispatchQueue.main.async {
+//                self.genres = genres
+//            }
+//        } catch {
+//            DispatchQueue.main.async {
+//                self.alertModel = self.toAlerModel(error)
+//            }
+//        }
+//    }
     
     private func toAlerModel(_ error: Error) -> AlertModel {
         guard let error = error as? MovieError else {
@@ -67,5 +69,45 @@ class GenreSectionViewModel: GenreSectionViewModelProtocol, ErrorViewModelProtoc
                 dismissButtonTitle: "button.close.text"
             )
         }
+    }
+    
+    init() {
+            let request = FetchGenreRequest()
+            
+            let future = Future<[Genre], Error> { promise in
+                Task {
+                    do {
+                        let genres = try await self.movieService.fetchGenres(req: request)
+                        promise(.success(genres))
+                    } catch {
+                        promise(.failure(error))
+                    }
+                }
+            }
+        
+            let futureTV = Future<[Genre], Error> { promise in
+                Task {
+                    do {
+                        let genres = try await self.movieService.fetchTVGenres(req: request)
+                        promise(.success(genres))
+                    } catch {
+                        promise(.failure(error))
+                    }
+                }
+            }
+            
+            future
+                .receive(on: RunLoop.main)
+                .sink { completion in
+                    switch completion {
+                    case .failure(let error):
+                        self.alertModel = self.toAlerModel(error)
+                    case .finished:
+                        break
+                    }
+                } receiveValue: { genres in
+                    self.genres = genres
+                }
+                .store(in: &cancellables)
     }
 }
