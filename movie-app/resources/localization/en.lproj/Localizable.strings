@@ -7,3 +7,8 @@
 */
 
 "genreSection.title" = "Movie app";
+"search.empty.title" = "Kezdj el gépelni\na kereséshez";
+"search.textfield.placeholder" = "Movies, Director, Actor, Actress, etc.";
+"button.close.text" = "Bezárás";
+"unexpected.error.title" = "Váratlan hiba";
+"unexpected.error.message" = "Váratlab hiba történt. Kérjük próbálja meg később.";
