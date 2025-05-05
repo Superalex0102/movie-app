@@ -41,6 +41,15 @@ struct GenreSectionView: View {
         ZStack(alignment: .topTrailing) {
             NavigationView {
                 ZStack {
+                    GeometryReader { geometry in
+                        Image(.ellipse)
+                            .resizable()
+                            .frame(width: 400, height: 400)
+                            .position(x: geometry.size.width - 50, y: 50)
+                            .padding()
+                    }
+                    .ignoresSafeArea()
+                    
                     List(viewModel.genres) { genre in
                         ZStack {
                             NavigationLink(destination: MovieListView(genre: genre)) {
@@ -69,16 +78,6 @@ struct GenreSectionView: View {
                     await viewModel.fetchGenres()
                 }
             }
-            
-            //TODO: Ellipse hides part of the text
-            GeometryReader { geometry in
-                Image(.ellipse)
-                    .resizable()
-                    .frame(width: 400, height: 400)
-                    .position(x: geometry.size.width - 50, y: 50)
-                    .padding()
-            }
-            .ignoresSafeArea()
         }
         .ignoresSafeArea()
     }
