@@ -20,13 +20,24 @@ class ServiceAssembly: Assembly {
                 session: Session(configuration: configuration,
                                  startRequestsImmediately: false),
                 plugins: [
-                    NetworkLoggerPlugin()
+                    NetworkLoggerPlugin(
+                        configuration: NetworkLoggerPlugin.Configuration(
+                            output: { _, items in
+                                for item in items {
+                                    print("Response \(item)")
+                                }
+                            },
+                            logOptions: .verbose))
                 ])
         }.inObjectScope(.container)
         
         container.register(MoviesServiceProtocol.self) { _ in
             return MoviesService()
 //            return MockMoviesService()
+        }.inObjectScope(.container)
+        
+        container.register(ReactiveMoviesServiceProtocol.self) { _ in
+            return ReactiveMoviesService()
         }.inObjectScope(.container)
     }
 }

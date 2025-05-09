@@ -7,3 +7,9 @@
 */
 
 "genreSection.title" = "Filmek alkalmazás";
+"search.empty.title" = "Kezdj el gépelni\na kereséshez";
+"search.textfield.placeholder" = "Movies, Director, Actor, Actress, etc.";
+"button.close.text" = "Close";
+"unexpected.error.title" = "Unexpected Error";
+"unexpected.error.message" = "Something went wrong. Please try again later";
+"favoriteMovies.title" = "Kedvencek";

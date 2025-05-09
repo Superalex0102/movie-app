@@ -8,31 +8,6 @@
 import SwiftUI
 import InjectPropertyWrapper
 
-protocol GenreSectionViewModelProtocol: ObservableObject {
-    
-}
-
-class GenreSectionViewModel: GenreSectionViewModelProtocol {
-    @Published var genres: [Genre] = []
-    
-    @Inject
-    private var movieService: MoviesServiceProtocol
-    
-    func fetchGenres() async {
-        do {
-            let request = FetchGenreRequest()
-            let genres = Environment.name == .tv ?
-                try await movieService.fetchGenres(req: request) :
-                try await movieService.fetchTVGenres(req: request)
-            DispatchQueue.main.async {
-                self.genres = genres
-            }
-        } catch {
-            print("Error fetching genres: \(error)")
-        }
-    }
-}
-
 struct GenreSectionView: View {
     
     @StateObject private var viewModel = GenreSectionViewModel()
@@ -57,26 +32,25 @@ struct GenreSectionView: View {
                             }
                             .opacity(0)
                             
-                            HStack {
-                                Text(genre.name)
-                                    .font(Fonts.title)
-                                    .foregroundStyle(Color.primary)
-                                Spacer()
-                                Image(.rightArrow)
-                            }
+                            GenreSectionCell(genre: genre)
                         }
                         .listRowBackground(Color.clear)
                         .listRowSeparator(.hidden)
                     }
                     .background(Color.clear)
                     .listStyle(.plain)
-                    .navigationTitle(Environment.name == .dev ? "DEV" : "PROD")
+                    .navigationTitle(Environment.name == .tv ? "TV" : "genreSection.title")
+                    .accessibilityLabel("testCollectionView")
                 }
             }
-            .onAppear {
-                Task {
-                    await viewModel.fetchGenres()
-                }
+            .alert(item: $viewModel.alertModel) { model in
+                return Alert(
+                    title: Text(model.title),
+                    message: Text(model.message),
+                    dismissButton: .default(Text(model.dismissButtonTitle)) {
+                        viewModel.alertModel = nil
+                    }
+                )
             }
         }
         .ignoresSafeArea()

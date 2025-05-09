@@ -1,13 +1,13 @@
 //
-//  MovieListResponse.swift
+//  TVResponse.swift
 //  movie-app
 //
-//  Created by Alexander Dominik Somogyi on 2025. 04. 15..
+//  Created by Alexander Dominik Somogyi on 2025. 05. 09..
 //
 
-struct MoviePageResponse: Decodable {
+struct TVPageResponse: Decodable {
     let page: Int
-    let results: [MovieResponse]
+    let results: [TVResponse]
     let totalPages: Int
     let totalResults: Int
 
@@ -19,18 +19,18 @@ struct MoviePageResponse: Decodable {
     }
 }
 
-struct MovieResponse: Decodable {
+struct TVResponse: Decodable {
     let id: Int
-    let title: String
-    let releaseDate: String
+    let name: String
+    let firstAirDate: String?
     let posterPath: String?
-    let voteAverage: Double
-    let voteCount: Int
+    let voteAverage: Double?
+    let voteCount: Int?
 
     enum CodingKeys: String, CodingKey {
         case id
-        case title
-        case releaseDate = "release_date"
+        case name
+        case firstAirDate = "first_air_date"
         case posterPath = "poster_path"
         case voteAverage = "vote_average"
         case voteCount = "vote_count"
