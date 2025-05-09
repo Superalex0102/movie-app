@@ -17,97 +17,33 @@ protocol GenreSectionViewModelProtocol: ObservableObject {
     var genres: [Genre] { get }
 }
 
-class GenreSectionViewModel: GenreSectionViewModelProtocol, ErrorViewModelProtocol {
+class GenreSectionViewModel: GenreSectionViewModelProtocol, ErrorPrentable {
     @Published var genres: [Genre] = []
     @Published var alertModel: AlertModel? = nil
     
     private var cancellables = Set<AnyCancellable>()
     
     @Inject
-    private var movieService: MoviesServiceProtocol
-    
-//    func fetchGenres() async {
-//        do {
-//            let request = FetchGenreRequest()
-//            let genres = Environment.name == .tv ? try await movieService.fetchTVGenres(req: request) :
-//                                                    try await movieService.fetchGenres(req: request)
-//            DispatchQueue.main.async {
-//                self.genres = genres
-//            }
-//        } catch {
-//            DispatchQueue.main.async {
-//                self.alertModel = self.toAlerModel(error)
-//            }
-//        }
-//    }
-    
-    private func toAlerModel(_ error: Error) -> AlertModel {
-        guard let error = error as? MovieError else {
-            return AlertModel(
-                title: "unexpected.error.title",
-                message: "unexpected.error.message",
-                dismissButtonTitle: "button.close.text"
-            )
-        }
-        switch error {
-        case .invalidApiKeyError(let message):
-            return AlertModel(
-                title: "API Error",
-                message: message,
-                dismissButtonTitle: "button.close.text"
-            )
-        case .clientError:
-            return AlertModel(
-                title: "Client Error",
-                message: error.localizedDescription,
-                dismissButtonTitle: "button.close.text"
-            )
-        default:
-            return AlertModel(
-                title: "unexpected.error.title",
-                message: "unexpected.error.message",
-                dismissButtonTitle: "button.close.text"
-            )
-        }
-    }
+    private var service: ReactiveMoviesServiceProtocol
     
     init() {
-            let request = FetchGenreRequest()
-            
-            let future = Future<[Genre], Error> { promise in
-                Task {
-                    do {
-                        let genres = try await self.movieService.fetchGenres(req: request)
-                        promise(.success(genres))
-                    } catch {
-                        promise(.failure(error))
-                    }
-                }
-            }
+        let request = FetchGenreRequest()
         
-            let futureTV = Future<[Genre], Error> { promise in
-                Task {
-                    do {
-                        let genres = try await self.movieService.fetchTVGenres(req: request)
-                        promise(.success(genres))
-                    } catch {
-                        promise(.failure(error))
-                    }
+        let genres = Environment.name == .tv ?
+        self.service.fetchTVGenres(req: request) :
+        self.service.fetchGenres(req: request)
+        
+        genres
+            .handleEvents(receiveOutput: { genres in
+                print("Custom action before receive: genres count = \(genres.count)")
+            })
+            .sink { completion in
+                if case let .failure(error) = completion {
+                    self.alertModel = self.toAlerModel(error)
                 }
+            } receiveValue: { genres in
+                self.genres = genres
             }
-            
-            future
-                .receive(on: RunLoop.main)
-                .sink { completion in
-                    switch completion {
-                    case .failure(let error):
-                        self.alertModel = self.toAlerModel(error)
-                    case .finished:
-                        break
-                    }
-                } receiveValue: { genres in
-                    self.genres = genres
-                }
-                .store(in: &cancellables)
+            .store(in: &cancellables)
     }
 }

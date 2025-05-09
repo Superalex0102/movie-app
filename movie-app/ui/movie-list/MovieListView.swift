@@ -5,11 +5,6 @@ struct MovieListView: View {
     @StateObject private var viewModel = MovieListViewModel()
     let genre: Genre
     
-//    let columns = [
-//        GridItem(.flexible(), spacing: 16),
-//        GridItem(.flexible(), spacing: 16)
-//    ]
-    
     let columns = [
         GridItem(.adaptive(minimum: 150), spacing: LayoutConst.normalPadding)
     ]
@@ -25,10 +20,17 @@ struct MovieListView: View {
             .padding(.top, 16)
         }
         .navigationTitle(genre.name)
+        .alert(item: $viewModel.alertModel) { model in
+            return Alert(
+                title: Text(LocalizedStringKey(model.title)),
+                message: Text(LocalizedStringKey(model.message)),
+                dismissButton: .default(Text(LocalizedStringKey(model.dismissButtonTitle))) {
+                    viewModel.alertModel = nil
+                }
+            )
+        }
         .onAppear {
-            Task {
-                await viewModel.loadMovies(by: genre.id)
-            }
+            viewModel.genreIdSubject.send(genre.id)
         }
     }
 }

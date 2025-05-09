@@ -8,6 +8,7 @@
 import Foundation
 import Moya
 import InjectPropertyWrapper
+import Combine
 
 struct MovieAPIErrorResponse: Decodable {
     let statusCode: Int
@@ -26,6 +27,7 @@ protocol MoviesServiceProtocol {
     func fetchTVGenres(req: FetchGenreRequest) async throws -> [Genre]
     func fetchMovies(req: FetchMoviesRequest) async throws -> [Movie]
     func searchMovies(req: SearchMovieRequest) async throws -> [Movie]
+    func fetchFavouriteMovies(req: FetchFavouriteMovieRequest) async throws -> [Movie]
 }
 
 class MoviesService: MoviesServiceProtocol {
@@ -60,6 +62,14 @@ class MoviesService: MoviesServiceProtocol {
     func searchMovies(req: SearchMovieRequest) async throws -> [Movie] {
         try await requestAndTransform(
             target: MultiTarget(MoviesApi.searchMovies(req: req)),
+            decodeTo: MoviePageResponse.self,
+            transform: { $0.results.map(Movie.init(dto:)) }
+        )
+    }
+    
+    func fetchFavouriteMovies(req: FetchFavouriteMovieRequest) async throws -> [Movie] {
+        try await requestAndTransform(
+            target: MultiTarget(MoviesApi.fetchFavouriteMovies(req: req)),
             decodeTo: MoviePageResponse.self,
             transform: { $0.results.map(Movie.init(dto:)) }
         )

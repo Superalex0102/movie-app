@@ -12,3 +12,4 @@
 "button.close.text" = "Close";
 "unexpected.error.title" = "Unexpected Error";
 "unexpected.error.message" = "Something went wrong. Please try again later";
+"favoriteMovies.title" = "Kedvencek";

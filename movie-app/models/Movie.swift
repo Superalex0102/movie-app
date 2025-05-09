@@ -27,7 +27,9 @@ struct Movie: Identifiable {
     }
     
     init(dto: MovieResponse) {
-        let year = String(dto.releaseDate.prefix(4))
+        let releaseDate: String? = dto.releaseDate
+        let prefixedYear: Substring = releaseDate?.prefix(4) ?? "-"
+        let year = String(prefixedYear)
         let duration = "1h 25min" // TODO: placeholder – ha lesz ilyen adat, cserélhető
         
         var imageUrl: URL? {
@@ -41,8 +43,28 @@ struct Movie: Identifiable {
         self.year = year
         self.duration = duration
         self.imageUrl = imageUrl
-        self.rating = dto.voteAverage
-        self.voteCount = dto.voteCount
-        
+        self.rating = dto.voteAverage ?? 0.0
+        self.voteCount = dto.voteCount ?? 0
     }
+    
+    init(dto: TVResponse) {
+         let releaseDate: String? = dto.firstAirDate
+         let prefixedYear: Substring = releaseDate?.prefix(4) ?? "-"
+         let year = String(prefixedYear)
+         let duration = "1h 25min" // TODO: placeholder – ha lesz ilyen adat, cserélhető
+         
+         var imageUrl: URL? {
+             dto.posterPath.flatMap {
+                 URL(string: "https://image.tmdb.org/t/p/w500\($0)")
+             }
+         }
+         
+         self.id = dto.id
+         self.title = dto.name
+         self.year = year
+         self.duration = duration
+         self.imageUrl = imageUrl
+         self.rating = dto.voteAverage ?? 0.0
+         self.voteCount = dto.voteCount ?? 0
+     }
 }

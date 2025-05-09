@@ -46,7 +46,7 @@ struct MainTabView: View {
                     .background(Color.tabBarBackground)
                     .ignoresSafeArea()
                 
-                FavoritesView()
+                FavouritesView()
                     .tag(TabType.favorites)
                     .background(Color.tabBarBackground)
                     .ignoresSafeArea()

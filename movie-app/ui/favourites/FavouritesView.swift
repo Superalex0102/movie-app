@@ -8,17 +8,38 @@
 import SwiftUI
 import InjectPropertyWrapper
 
-struct FavoritesView: View {
-    @StateObject private var viewModel = FavoritesViewModel()
+struct FavouritesView: View {
+    @StateObject private var viewModel = FavouritesViewModel()
     
     var body: some View {
         NavigationView {
-            Text("Favorites Screen")
-                .navigationTitle("Favorites")
+            ScrollView {
+                LazyVStack(spacing: LayoutConst.normalPadding) {
+                    ForEach(viewModel.movies) { movie in
+                        MovieCellView(movie: movie)
+                            .frame(height: 277)
+                    }
+                }
+                .padding(.horizontal, LayoutConst.normalPadding)
+                .padding(.top, LayoutConst.normalPadding)
+            }
+            .navigationTitle("favoriteMovies.title")
+        }
+        .alert(item: $viewModel.alertModel) { model in
+            
+            Alert(
+                title: Text(LocalizedStringKey(model.title)),
+                message: Text(LocalizedStringKey(model.message)),
+                primaryButton: .default(Text(LocalizedStringKey(model.dismissButtonTitle))) {
+                    
+                }, secondaryButton: .destructive(Text(LocalizedStringKey(model.dismissButtonTitle))) {
+                    
+                }
+            )
         }
     }
 }
 
 #Preview {
-    FavoritesView()
+    FavouritesView()
 } 

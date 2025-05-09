@@ -36,7 +36,8 @@ struct GenreSectionView: View {
                 }
                 .background(Color.clear)
                 .listStyle(.plain)
-                .navigationTitle(Environment.name == .dev ? "DEV" : "PROD")
+                .navigationTitle(Environment.name == .tv ? "TV" : "genreSection.title")
+                .accessibilityLabel("testCollectionView")
             }
             .alert(item: $viewModel.alertModel) { model in
                 return Alert(
