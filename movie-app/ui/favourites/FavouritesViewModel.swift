@@ -13,7 +13,7 @@ protocol FavouritesViewModelProtocol: ObservableObject {
     var movies: [Movie] { get }
 }
 
-class FavouritesViewModel: FavouritesViewModelProtocol, ErrorPrentable {
+class FavouritesViewModel: FavouritesViewModelProtocol, ErrorPresentable {
     @Published var movies: [Movie] = []
     @Published var alertModel: AlertModel? = nil
     

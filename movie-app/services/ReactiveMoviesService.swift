@@ -17,7 +17,8 @@ protocol ReactiveMoviesServiceProtocol {
     func fetchMovies(req: FetchMoviesRequest) -> AnyPublisher<[Movie], MovieError>
     func fetchTV(req: FetchMoviesRequest) -> AnyPublisher<[Movie], MovieError>
     func fetchFavouriteMovies(req: FetchFavouriteMovieRequest) -> AnyPublisher<[Movie], MovieError>
-    func addFavoriteMovie(req: AddFavouriteRequest) -> AnyPublisher<AddFavoriteResponse, MovieError>
+    func addFavouriteMovie(req: AddFavouriteRequest) -> AnyPublisher<AddFavoriteResponse, MovieError>
+    func fetchMovieDetail(req: FetchDetailRequest) -> AnyPublisher<MediaItemDetail, MovieError>
 }
 
 class ReactiveMoviesService: ReactiveMoviesServiceProtocol {
@@ -73,8 +74,16 @@ class ReactiveMoviesService: ReactiveMoviesServiceProtocol {
         )
     }
     
+    func fetchMovieDetail(req: FetchDetailRequest) -> AnyPublisher<MediaItemDetail, MovieError> {
+        requestAndTransform(
+            target: MultiTarget(MoviesApi.fetchMovieDetail(req: req)),
+            decodeTo: MovieDetailResponse.self,
+            transform: { MediaItemDetail(dto: $0) }
+        )
+    }
+    
     //TODO: Reafctorn and create a domain model to AddFavoriteResponse
-    func addFavoriteMovie(req: AddFavouriteRequest) -> AnyPublisher<AddFavoriteResponse, MovieError> {
+    func addFavouriteMovie(req: AddFavouriteRequest) -> AnyPublisher<AddFavoriteResponse, MovieError> {
         requestAndTransform(
             target: MultiTarget(MoviesApi.addFavouriteMovie(req: req)),
             decodeTo: AddFavoriteResponse.self,
@@ -100,7 +109,7 @@ class ReactiveMoviesService: ReactiveMoviesServiceProtocol {
                             let output = transform(decoded)
                             future(.success(output))
                         } catch {
-                            future(.failure(MovieError.unexpectedError))
+                            future(.failure(MovieError.mappingError(message: error.localizedDescription)))
                         }
                     case 400..<500:
                         future(.failure(MovieError.clientError))

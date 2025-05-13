@@ -16,6 +16,7 @@ enum MoviesApi {
     case searchMovies(req: SearchMovieRequest)
     case addFavouriteMovie(req: AddFavouriteRequest)
     case fetchFavouriteMovies(req: FetchFavouriteMovieRequest)
+    case fetchMovieDetail(req: FetchDetailRequest)
 }
 
 extension MoviesApi: TargetType {
@@ -44,12 +45,14 @@ extension MoviesApi: TargetType {
             return "account/\(req.accountId)/favorite"
         case .fetchTV:
             return "discover/tv"
+        case .fetchMovieDetail(req: let req):
+            return "movie/\(req.mediaId)"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .fetchGenres, .fetchTVGenres, .fetchMovies, .fetchTV, .searchMovies, .fetchFavouriteMovies:
+        case .fetchGenres, .fetchTVGenres, .fetchMovies, .fetchTV, .searchMovies, .fetchFavouriteMovies, . fetchMovieDetail:
             return .get
         case .addFavouriteMovie:
             return .post
@@ -73,6 +76,8 @@ extension MoviesApi: TargetType {
             return .requestParameters(parameters: req.asRequestParams(), encoding: URLEncoding.queryString)
         case .addFavouriteMovie(req: let req):
             return .requestParameters(parameters: req.asRequestParams(), encoding: URLEncoding.queryString)
+        case .fetchMovieDetail(req: let req):
+            return .requestParameters(parameters: req.asRequestParams(), encoding: URLEncoding.queryString)
         }
     }
     
@@ -94,6 +99,8 @@ extension MoviesApi: TargetType {
         case let .fetchFavouriteMovies(req):
             return ["Authorization": req.accessToken]
         case .addFavouriteMovie(req: let req):
+            return ["Authorization": req.accessToken]
+        case .fetchMovieDetail(req: let req):
             return ["Authorization": req.accessToken]
         }
     }

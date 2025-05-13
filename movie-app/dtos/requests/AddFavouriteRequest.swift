@@ -11,6 +11,10 @@ struct AddFavouriteRequest {
     let movieId: Int
     
     func asRequestParams() -> [String: Any] {
-        return [:]
+        return [
+            "media_type": "movie",
+            "media_id": movieId,
+            "favorite": true
+        ]
     }
 }

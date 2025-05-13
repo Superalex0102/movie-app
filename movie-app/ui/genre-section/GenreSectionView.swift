@@ -43,15 +43,7 @@ struct GenreSectionView: View {
                     .accessibilityLabel("testCollectionView")
                 }
             }
-            .alert(item: $viewModel.alertModel) { model in
-                return Alert(
-                    title: Text(model.title),
-                    message: Text(model.message),
-                    dismissButton: .default(Text(model.dismissButtonTitle)) {
-                        viewModel.alertModel = nil
-                    }
-                )
-            }
+            .showAlert(model: $viewModel.alertModel)
         }
         .ignoresSafeArea()
     }

@@ -5,11 +5,11 @@
 //  Created by Alexander Dominik Somogyi on 2025. 05. 09..
 //
 
-protocol ErrorPrentable {
+protocol ErrorPresentable {
     func toAlerModel(_ error: Error) -> AlertModel
 }
 
-extension ErrorPrentable {
+extension ErrorPresentable {
     func toAlerModel(_ error: Error) -> AlertModel {
         guard let error = error as? MovieError else {
             return AlertModel(

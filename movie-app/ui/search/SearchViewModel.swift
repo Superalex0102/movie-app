@@ -14,7 +14,7 @@ protocol SearchViewModelProtocol: ObservableObject {
     var searchText: String { get set }
 }
 
-class SearchViewModel: SearchViewModelProtocol, ErrorPrentable {
+class SearchViewModel: SearchViewModelProtocol, ErrorPresentable {
     @Published var movies: [Movie] = []
     @Published var searchText: String = ""
     @Published var alertModel: AlertModel? = nil

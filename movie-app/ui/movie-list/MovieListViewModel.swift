@@ -13,7 +13,7 @@ protocol MovieListViewModelProtocol: ObservableObject {
     var movies: [Movie] { get }
 }
 
-class MovieListViewModel: MovieListViewModelProtocol, ErrorPrentable {
+class MovieListViewModel: MovieListViewModelProtocol, ErrorPresentable {
     @Published var movies: [Movie] = []
     @Published var alertModel: AlertModel? = nil
     
@@ -31,7 +31,7 @@ class MovieListViewModel: MovieListViewModelProtocol, ErrorPrentable {
                 guard let self = self else {
                     preconditionFailure("There is no self")
                 }
-                let request = FetchMoviesRequest(genreId: genreId)
+                let request = FetchMoviesRequest(genreId: genreId, includeAdult: true)
                 return Environment.name == .tv ?
                                                 self.service.fetchTV(req: request) :
                                                 self.service.fetchMovies(req: request)

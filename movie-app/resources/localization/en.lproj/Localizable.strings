@@ -13,3 +13,11 @@
 "unexpected.error.title" = "Váratlan hiba";
 "unexpected.error.message" = "Váratlab hiba történt. Kérjük próbálja meg később.";
 "favoriteMovies.title" = "Favorites";
+"detail.rate.button" = "Rate this movie";
+"detail.imdb.button" = "Visit at IMDB";
+"detail.releaseDate" = "Release Date";
+"detail.language" = "Language";
+"detail.runtime" = "Runtime";
+"detail.overview" = "Synopsis";
+"available" = "Available";
+"unavailable" = "Unavailable";

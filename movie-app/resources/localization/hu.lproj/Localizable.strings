@@ -13,3 +13,11 @@
 "unexpected.error.title" = "Unexpected Error";
 "unexpected.error.message" = "Something went wrong. Please try again later";
 "favoriteMovies.title" = "Kedvencek";
+"detail.rate.button" = "Értékeld a filmet";
+"detail.imdb.button" = "Látogass el IMDB-re";
+"detail.releaseDate" = "Kiadott dátum";
+"detail.language" = "Nyelv";
+"detail.runtime" = "Lejátszási idő";
+"detail.overview" = "Áttekintés";
+"available" = "Elérhető";
+"unavailable" = "Nem elérhető";

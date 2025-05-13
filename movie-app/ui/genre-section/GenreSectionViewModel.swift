@@ -17,7 +17,7 @@ protocol GenreSectionViewModelProtocol: ObservableObject {
     var genres: [Genre] { get }
 }
 
-class GenreSectionViewModel: GenreSectionViewModelProtocol, ErrorPrentable {
+class GenreSectionViewModel: GenreSectionViewModelProtocol, ErrorPresentable {
     @Published var genres: [Genre] = []
     @Published var alertModel: AlertModel? = nil
     
