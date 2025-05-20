@@ -19,5 +19,7 @@
 "detail.language" = "Nyelv";
 "detail.runtime" = "Lejátszási idő";
 "detail.overview" = "Áttekintés";
+"detail.publishers" = "Publisher and companies";
+"detail.cast" = "Cast";
 "available" = "Elérhető";
 "unavailable" = "Nem elérhető";

@@ -9,6 +9,7 @@ import Foundation
 import Moya
 import InjectPropertyWrapper
 import Combine
+import Alamofire
 
 protocol ReactiveMoviesServiceProtocol {
     func fetchGenres(req: FetchGenreRequest) -> AnyPublisher<[Genre], MovieError>
@@ -16,15 +17,22 @@ protocol ReactiveMoviesServiceProtocol {
     func searchMovies(req: SearchMovieRequest) -> AnyPublisher<[Movie], MovieError>
     func fetchMovies(req: FetchMoviesRequest) -> AnyPublisher<[Movie], MovieError>
     func fetchTV(req: FetchMoviesRequest) -> AnyPublisher<[Movie], MovieError>
-    func fetchFavouriteMovies(req: FetchFavouriteMovieRequest) -> AnyPublisher<[Movie], MovieError>
-    func addFavouriteMovie(req: AddFavouriteRequest) -> AnyPublisher<AddFavoriteResponse, MovieError>
+    func fetchFavouriteMovies(req: FetchFavouriteMovieRequest, fromLocal: Bool) -> AnyPublisher<[Movie], MovieError>
+    func editFavouriteMovie(req: EditFavouriteRequest) -> AnyPublisher<EditFavouriteResult, MovieError>
     func fetchMovieDetail(req: FetchDetailRequest) -> AnyPublisher<MediaItemDetail, MovieError>
+    func fetchMovieCredits(req: FetchMovieCreditsRequest) -> AnyPublisher<[CastMember], MovieError>
 }
 
 class ReactiveMoviesService: ReactiveMoviesServiceProtocol {
     
     @Inject
     var moya: MoyaProvider<MultiTarget>!
+    
+    @Inject
+    private var store: MediaItemStoreProtocol
+    
+    @Inject
+    private var networkMonitor: NetworkMonitorProtocol
     
     func fetchGenres(req: FetchGenreRequest) -> AnyPublisher<[Genre], MovieError> {
         requestAndTransform(
@@ -66,13 +74,30 @@ class ReactiveMoviesService: ReactiveMoviesServiceProtocol {
         )
     }
     
-    func fetchFavouriteMovies(req: FetchFavouriteMovieRequest) -> AnyPublisher<[Movie], MovieError> {
-        requestAndTransform(
-            target: MultiTarget(MoviesApi.fetchFavouriteMovies(req: req)),
-            decodeTo: MoviePageResponse.self,
-            transform: { $0.results.map(Movie.init(dto:)) }
-        )
-    }
+    func fetchFavouriteMovies(req: FetchFavouriteMovieRequest, fromLocal: Bool = false) -> AnyPublisher<[Movie], MovieError> {
+            
+            let serviceResponse: AnyPublisher<[Movie], MovieError> = self.requestAndTransform(
+                target: MultiTarget(MoviesApi.fetchFavouriteMovies(req: req)),
+                decodeTo: MoviePageResponse.self,
+                transform: { $0.results.map(Movie.init(dto:)) }
+            )
+            .handleEvents(receiveOutput: { [weak self]mediaItems in
+                self?.store.saveMediaItems(mediaItems)
+            })
+            .eraseToAnyPublisher()
+            
+            let localResponse: AnyPublisher<[Movie], MovieError> = store.mediaItems
+            
+            return networkMonitor.isConnected
+                .flatMap { isConnected -> AnyPublisher<[Movie], MovieError> in
+                    if isConnected {
+                        return serviceResponse
+                    } else {
+                        return localResponse
+                    }
+                }
+                .eraseToAnyPublisher()
+        }
     
     func fetchMovieDetail(req: FetchDetailRequest) -> AnyPublisher<MediaItemDetail, MovieError> {
         requestAndTransform(
@@ -82,13 +107,22 @@ class ReactiveMoviesService: ReactiveMoviesServiceProtocol {
         )
     }
     
-    //TODO: Reafctorn and create a domain model to AddFavoriteResponse
-    func addFavouriteMovie(req: AddFavouriteRequest) -> AnyPublisher<AddFavoriteResponse, MovieError> {
+    func fetchMovieCredits(req: FetchMovieCreditsRequest) -> AnyPublisher<[CastMember], MovieError> {
         requestAndTransform(
-            target: MultiTarget(MoviesApi.addFavouriteMovie(req: req)),
-            decodeTo: AddFavoriteResponse.self,
+            target: MultiTarget(MoviesApi.fetchMovieCredits(req: req)),
+            decodeTo: MovieCreditsResponse.self,
+            transform: { dto in
+                dto.cast.map(CastMember.init(dto:))
+            }
+        )
+    }
+    
+    func editFavouriteMovie(req: EditFavouriteRequest) -> AnyPublisher<EditFavouriteResult, MovieError> {
+        requestAndTransform(
+            target: MultiTarget(MoviesApi.editFavouriteMovie(req: req)),
+            decodeTo: EditFavouriteResponse.self,
             transform: { response in
-                response
+                EditFavouriteResult(dto: response)
             }
         )
     }
@@ -124,13 +158,33 @@ class ReactiveMoviesService: ReactiveMoviesServiceProtocol {
                             future(.failure(MovieError.unexpectedError))
                         }
                     }
-                case .failure:
-                    future(.failure(MovieError.unexpectedError))
+                case .failure(let error):
+                    if error.isNoInternetError {
+                        future(.failure(MovieError.noInternetError))
+                    } else {
+                        future(.failure(MovieError.unexpectedError))
+                    }
                 }
             }
         }
         return future
             .eraseToAnyPublisher()
             
+    }
+}
+
+extension MoyaError {
+    var isNoInternetError: Bool {
+        if case let .underlying(error, _) = self {
+            // Ha AFError
+            if let afError = error as? AFError {
+                if let urlError = afError.underlyingError as? URLError {
+                    return urlError.code == .notConnectedToInternet
+                } else if let nsError = afError.underlyingError as NSError? {
+                    return nsError.domain == NSURLErrorDomain && nsError.code == NSURLErrorNotConnectedToInternet
+                }
+            }
+        }
+        return false
     }
 }

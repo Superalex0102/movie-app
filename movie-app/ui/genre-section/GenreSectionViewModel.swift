@@ -1,17 +1,6 @@
-//
-//  GenreSectionViewModel.swift
-//  movie-app
-//
-//  Created by Alexander Dominik Somogyi on 2025. 04. 26..
-//
-
 import Foundation
 import InjectPropertyWrapper
 import Combine
-
-protocol ErrorViewModelProtocol {
-    var alertModel: AlertModel? { get }
-}
 
 protocol GenreSectionViewModelProtocol: ObservableObject {
     var genres: [Genre] { get }
@@ -26,6 +15,9 @@ class GenreSectionViewModel: GenreSectionViewModelProtocol, ErrorPresentable {
     @Inject
     private var service: ReactiveMoviesServiceProtocol
     
+    @Inject
+    private var mediaItemRepository: MediaItemStoreProtocol
+    
     init() {
         let request = FetchGenreRequest()
         
@@ -39,11 +31,12 @@ class GenreSectionViewModel: GenreSectionViewModelProtocol, ErrorPresentable {
             })
             .sink { completion in
                 if case let .failure(error) = completion {
-                    self.alertModel = self.toAlerModel(error)
+                    self.alertModel = self.toAlertModel(error)
                 }
             } receiveValue: { genres in
                 self.genres = genres
             }
             .store(in: &cancellables)
+        
     }
 }

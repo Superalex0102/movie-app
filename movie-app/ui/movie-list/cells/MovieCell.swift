@@ -14,32 +14,10 @@ struct MovieCellView: View {
         VStack(alignment: .leading, spacing: LayoutConst.smallPadding) {
             ZStack(alignment: .topLeading) {
                 HStack(alignment: .center) {
-                    AsyncImage(url: movie.imageUrl) { phase in
-                        switch phase {
-                        case .empty:
-                            ZStack {
-                                Color.gray.opacity(0.3)
-                                ProgressView()
-                            }
-
-                        case let .success(image):
-                            image
-                                .resizable()
-                                .scaledToFill()
-
-                        case .failure(let error):
-                            ZStack {
-                                Color.red.opacity(0.3)
-                                Image(systemName: "photo")
-                                    .foregroundColor(.white)
-                            }
-                        @unknown default:
-                            EmptyView()
-                        }
-                    }
-                    .frame(height: 100)
-                    .frame(maxWidth: .infinity)
-                    .cornerRadius(12)
+                    LoadImageView(url: movie.imageUrl)
+                        .frame(height: 100)
+                        .frame(maxWidth: .infinity)
+                        .cornerRadius(12)
                 }
                 
                 //TODO: Import star image and add new font

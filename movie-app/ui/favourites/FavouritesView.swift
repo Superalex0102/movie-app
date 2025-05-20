@@ -15,31 +15,26 @@ struct FavouritesView: View {
         NavigationView {
             ScrollView {
                 LazyVStack(spacing: LayoutConst.normalPadding) {
-                    ForEach(viewModel.movies) { movie in
-                        MovieCellView(movie: movie)
-                            .frame(height: 277)
+                    ForEach(viewModel.mediaItems) { movie in
+                        NavigationLink(destination: DetailView(mediaItem: movie)) {
+                            MovieCell(movie: movie)
+                                .frame(height: 277)
+                        }
+                        .buttonStyle(PlainButtonStyle())
                     }
                 }
                 .padding(.horizontal, LayoutConst.normalPadding)
                 .padding(.top, LayoutConst.normalPadding)
             }
-            .navigationTitle("favoriteMovies.title")
+            .navigationTitle("favouriteMovies.title")
         }
-        .alert(item: $viewModel.alertModel) { model in
-            
-            Alert(
-                title: Text(LocalizedStringKey(model.title)),
-                message: Text(LocalizedStringKey(model.message)),
-                primaryButton: .default(Text(LocalizedStringKey(model.dismissButtonTitle))) {
-                    
-                }, secondaryButton: .destructive(Text(LocalizedStringKey(model.dismissButtonTitle))) {
-                    
-                }
-            )
+        .showAlert(model: $viewModel.alertModel)
+        .onAppear {
+            viewModel.viewLoaded.send(())
         }
     }
 }
 
 #Preview {
     FavouritesView()
-} 
+}

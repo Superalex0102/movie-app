@@ -15,7 +15,7 @@ struct movie_appApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainTabView(selectedTab: $selectedTab)
+            RootView(selectedTab: selectedTab)
         }
     }
 }

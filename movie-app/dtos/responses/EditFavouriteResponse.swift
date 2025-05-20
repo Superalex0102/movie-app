@@ -5,7 +5,7 @@
 //  Created by Alexander Dominik Somogyi on 2025. 05. 09..
 //
 
-struct AddFavoriteResponse : Decodable {
+struct EditFavouriteResponse : Decodable {
     let success : Bool
     let statusCode : Int
     let statusMessage : String
