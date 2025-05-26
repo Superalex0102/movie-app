@@ -14,7 +14,7 @@ enum MoviesApi {
     case fetchMovies(req: FetchMoviesRequest)
     case fetchTV(req: FetchMoviesRequest)
     case searchMovies(req: SearchMovieRequest)
-    case editFavouriteMovie(req: ModifyMediaRequest)
+    case editFavouriteMovie(req: EditFavouriteRequest)
     case fetchFavouriteMovies(req: FetchFavouriteMovieRequest)
     case fetchMovieDetail(req: FetchDetailRequest)
     case fetchMovieCredits(req: FetchMovieCreditsRequest)

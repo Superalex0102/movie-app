@@ -12,7 +12,7 @@
 "button.close.text" = "Bezárás";
 "unexpected.error.title" = "Váratlan hiba";
 "unexpected.error.message" = "Váratlab hiba történt. Kérjük próbálja meg később.";
-"favoriteMovies.title" = "Kedvencek";
+"favouriteMovies.title" = "Kedvencek";
 "detail.rate.button" = "Rate this movie";
 "detail.imdb.button" = "Visit at IMDB";
 "detail.releaseDate" = "Release Date";

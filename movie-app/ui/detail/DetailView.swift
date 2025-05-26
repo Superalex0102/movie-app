@@ -71,9 +71,9 @@ struct DetailView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: {
-                    
+                    viewModel.favouriteButtonTapped.send(())
                 }) {
-                    Image(.favourite)
+                    Image(viewModel.isFavourite ? .favourite : .nonFavourite)
                         .resizable()
                         .frame(height: 30.0)
                         .frame(width: 30.0)

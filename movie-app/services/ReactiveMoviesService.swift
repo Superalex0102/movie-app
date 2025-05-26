@@ -18,7 +18,7 @@ protocol ReactiveMoviesServiceProtocol {
     func fetchMovies(req: FetchMoviesRequest) -> AnyPublisher<[Movie], MovieError>
     func fetchTV(req: FetchMoviesRequest) -> AnyPublisher<[Movie], MovieError>
     func fetchFavouriteMovies(req: FetchFavouriteMovieRequest, fromLocal: Bool) -> AnyPublisher<[Movie], MovieError>
-    func editFavouriteMovie(req: ModifyMediaRequest) -> AnyPublisher<EditFavouriteResult, MovieError>
+    func editFavouriteMovie(req: EditFavouriteRequest) -> AnyPublisher<EditFavouriteResult, MovieError>
     func fetchMovieDetail(req: FetchDetailRequest) -> AnyPublisher<MediaItemDetail, MovieError>
     func fetchMovieCredits(req: FetchMovieCreditsRequest) -> AnyPublisher<[CastMember], MovieError>
 //    func addReview(req: AddReviewRequest) -> AnyPublisher<[ModifyMediaResult], MovieError>
@@ -162,10 +162,10 @@ class ReactiveMoviesService: ReactiveMoviesServiceProtocol {
             .eraseToAnyPublisher()
     }
     
-    func editFavouriteMovie(req: ModifyMediaRequest) -> AnyPublisher<EditFavouriteResult, MovieError> {
+    func editFavouriteMovie(req: EditFavouriteRequest) -> AnyPublisher<EditFavouriteResult, MovieError> {
         requestAndTransform(
             target: MultiTarget(MoviesApi.editFavouriteMovie(req: req)),
-            decodeTo: ModifyMediaResponse.self,
+            decodeTo: EditFavouriteResponse.self,
             transform: { response in
                 EditFavouriteResult(dto: response)
             }
