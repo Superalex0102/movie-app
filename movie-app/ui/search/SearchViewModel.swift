@@ -40,7 +40,7 @@ class SearchViewModel: SearchViewModelProtocol, ErrorPresentable {
             }
             .sink { [weak self] completion in
                 if case let .failure(error) = completion {
-                    self?.alertModel = self?.toAlerModel(error)
+                    self?.alertModel = self?.toAlertModel(error)
                 }
             } receiveValue: { [weak self] movies in
                 self?.movies = movies

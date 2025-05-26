@@ -31,14 +31,14 @@ extension MediaItemEntity {
         )
     }
 
-   convenience init(from domains: Movie) {
+   convenience init(from domain: Movie) {
         self.init()
-        self.id = domains.id
-        self.title = domains.title
-        self.year = domains.year
-        self.duration = domains.duration
-        self.imageUrlString = domains.imageUrl?.absoluteString
-        self.rating = domains.rating
-        self.voteCount = domains.voteCount
+        self.id = domain.id
+        self.title = domain.title
+        self.year = domain.year
+        self.duration = domain.duration
+        self.imageUrlString = domain.imageUrl?.absoluteString
+        self.rating = domain.rating
+        self.voteCount = domain.voteCount
     }
 }

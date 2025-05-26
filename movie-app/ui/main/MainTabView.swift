@@ -10,7 +10,7 @@ import SwiftUI
 enum TabType: String, CaseIterable {
     case genre
     case search
-    case favorites
+    case favourites
     case settings
 }
 
@@ -47,7 +47,7 @@ struct MainTabView: View {
                     .ignoresSafeArea()
                 
                 FavouritesView()
-                    .tag(TabType.favorites)
+                    .tag(TabType.favourites)
                     .background(Color.tabBarBackground)
                     .ignoresSafeArea()
                 
@@ -73,9 +73,6 @@ struct MainTabView: View {
                     .clipShape(RoundedCorner(radius: 30, corners: [.topLeft, .topRight]))
                     .ignoresSafeArea(edges: .bottom)
             )
-            
-            
-            
         }
     }
 }

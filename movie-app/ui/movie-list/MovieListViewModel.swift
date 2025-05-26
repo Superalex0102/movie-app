@@ -32,14 +32,14 @@ class MovieListViewModel: MovieListViewModelProtocol, ErrorPresentable {
                     preconditionFailure("There is no self")
                 }
                 let request = FetchMoviesRequest(genreId: genreId, includeAdult: true)
-                return Environment.name == .tv ?
+                return Environments.name == .tv ?
                                                 self.service.fetchTV(req: request) :
                                                 self.service.fetchMovies(req: request)
                 
             }
             .sink { [weak self] completion in
                 if case let .failure(error) = completion {
-                    self?.alertModel = self?.toAlerModel(error)
+                    self?.alertModel = self?.toAlertModel(error)
                 }
             } receiveValue: { [weak self] movies in
                 self?.movies = movies

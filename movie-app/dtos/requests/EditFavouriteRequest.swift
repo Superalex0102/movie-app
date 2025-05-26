@@ -2,7 +2,7 @@
 //  EditFavouriteRequest.swift
 //  movie-app
 //
-//  Created by Alexander Dominik Somogyi on 2025. 05. 20..
+//  Created by Alexander Dominik Somogyi on 2025. 05. 26..
 //
 
 struct EditFavouriteBodyRequest: Encodable {
@@ -19,7 +19,7 @@ struct EditFavouriteBodyRequest: Encodable {
 
 struct EditFavouriteRequest: Encodable {
     let accessToken: String = Config.bearerToken
-    let accountId: Int = 21889570
+    let accountId: Int = Config.accountID
     let movieId: Int
     let isFavourite: Bool
     
