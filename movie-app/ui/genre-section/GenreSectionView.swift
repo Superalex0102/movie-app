@@ -39,7 +39,7 @@ struct GenreSectionView: View {
                     }
                     .background(Color.clear)
                     .listStyle(.plain)
-                    .navigationTitle(Environment.name == .tv ? "TV" : "genreSection.title")
+                    .navigationTitle(Environments.name == .tv ? "TV" : "genreSection.title")
                     .accessibilityLabel("testCollectionView")
                 }
             }

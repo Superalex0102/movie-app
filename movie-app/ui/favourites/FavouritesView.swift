@@ -17,7 +17,7 @@ struct FavouritesView: View {
                 LazyVStack(spacing: LayoutConst.normalPadding) {
                     ForEach(viewModel.mediaItems) { movie in
                         NavigationLink(destination: DetailView(mediaItem: movie)) {
-                            MovieCell(movie: movie)
+                            MovieCellView(movie: movie)
                                 .frame(height: 277)
                         }
                         .buttonStyle(PlainButtonStyle())

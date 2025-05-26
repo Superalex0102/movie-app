@@ -73,9 +73,6 @@ struct MainTabView: View {
                     .clipShape(RoundedCorner(radius: 30, corners: [.topLeft, .topRight]))
                     .ignoresSafeArea(edges: .bottom)
             )
-            
-            
-            
         }
     }
 }

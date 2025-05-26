@@ -73,7 +73,7 @@ class DetailViewModel: DetailViewModelProtocol, ErrorPresentable {
                     preconditionFailure("There is no self")
                 }
                 let isFavourite = !self.isFavourite
-                let request = EditFavouriteRequest(movieId: self.mediaItemDetail.id, isFavourite: isFavourite)
+                let request = ModifyMediaRequest(movieId: self.mediaItemDetail.id, isFavourite: isFavourite)
                 return service.editFavouriteMovie(req: request)
                     .map { result in
                     (result, isFavourite)

@@ -40,11 +40,7 @@ struct StyledButton: View {
     private var baseView: some View {
         switch action {
         case .simple:
-            Button {
-                
-            } label: {
-                Text(LocalizedStringKey(title))
-            }
+            Text(LocalizedStringKey(title))
         case .link(let url):
             if let url = url {
                 Link(LocalizedStringKey(title), destination: url)
