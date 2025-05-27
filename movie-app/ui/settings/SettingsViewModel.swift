@@ -8,9 +8,11 @@
 import Foundation
 
 protocol SettingsViewModelProtocol: ObservableObject {
-    // TODO: Add settings related properties and methods
+    
 }
 
-class SettingsViewModel: SettingsViewModelProtocol {
-    // TODO: Implement settings functionality
-} 
+class SettingsViewModel: SettingsViewModelProtocol, ErrorPresentable {
+    @Published var alertModel: AlertModel? = nil
+    
+    let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+}
