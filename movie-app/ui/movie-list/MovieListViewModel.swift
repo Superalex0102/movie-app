@@ -22,7 +22,7 @@ class MovieListViewModel: MovieListViewModelProtocol, ErrorPresentable {
     private var cancellables = Set<AnyCancellable>()
     
     @Inject
-    private var service: ReactiveMoviesServiceProtocol
+    private var repository: MovieRepository
     
     init() {
         
@@ -33,8 +33,8 @@ class MovieListViewModel: MovieListViewModelProtocol, ErrorPresentable {
                 }
                 let request = FetchMoviesRequest(genreId: genreId, includeAdult: true)
                 return Environments.name == .tv ?
-                                                self.service.fetchTV(req: request) :
-                                                self.service.fetchMovies(req: request)
+                                                self.repository.fetchTV(req: request) :
+                                                self.repository.fetchMovies(req: request)
                 
             }
             .sink { [weak self] completion in

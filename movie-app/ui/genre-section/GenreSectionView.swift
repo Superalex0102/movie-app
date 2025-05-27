@@ -10,7 +10,7 @@ import InjectPropertyWrapper
 
 struct GenreSectionView: View {
     
-    @StateObject private var viewModel = GenreSectionViewModel()
+    @StateObject private var viewModel = GenreSectionViewModelImpl()
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -39,11 +39,15 @@ struct GenreSectionView: View {
                     }
                     .background(Color.clear)
                     .listStyle(.plain)
-                    .navigationTitle(Environments.name == .tv ? "TV" : "genreSection.title")
+                    .navigationTitle(Environments.name == .tv ? "TV" : "genreSection.title".localized())
                     .accessibilityLabel("testCollectionView")
                 }
             }
             .showAlert(model: $viewModel.alertModel)
+            .onAppear {
+                viewModel.loadGenres()
+                viewModel.genresAppeared()
+            }
         }
         .ignoresSafeArea()
     }

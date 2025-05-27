@@ -40,12 +40,12 @@ struct StyledButton: View {
     private var baseView: some View {
         switch action {
         case .simple:
-            Text(LocalizedStringKey(title))
+            Text(title.localized())
         case .link(let url):
             if let url = url {
-                Link(LocalizedStringKey(title), destination: url)
+                Link(title.localized(), destination: url)
             } else {
-                Text(LocalizedStringKey(title))
+                Text(title.localized())
             }
             
         }

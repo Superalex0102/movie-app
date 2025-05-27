@@ -20,7 +20,7 @@ struct ParticipantScrollView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12.0) {
-            Text(LocalizedStringKey(title))
+            Text(title.localized())
                 .font(Fonts.overviewText)
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 20.0) {

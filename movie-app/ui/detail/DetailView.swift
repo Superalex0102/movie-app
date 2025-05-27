@@ -53,7 +53,7 @@ struct DetailView: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 12.0) {
-                    Text(LocalizedStringKey("detail.overview"))
+                    Text("detail.overview".localized())
                         .font(Fonts.overviewText)
                     
                     Text(mediaItemDetail.overview)

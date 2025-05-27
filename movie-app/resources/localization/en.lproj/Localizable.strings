@@ -7,7 +7,7 @@
 */
 
 "genreSection.title" = "Movie app";
-"search.empty.title" = "Kezdj el gépelni\na kereséshez";
+"search.empty.title" = "Start typing\for search";
 "search.textfield.placeholder" = "Movies, Director, Actor, Actress, etc.";
 "button.close.text" = "Close";
 "unexpected.error.title" = "Unexpected Error";
@@ -26,10 +26,11 @@
 "noInternet" = "No internet connection";
 "addReview.subTitle" = "Give it  a honest review";
 "addReview.buttonTitle" = "Send my review";
+
 "settings.title" = "Settings";
 "settings.chooseLanguage" = "Choose Language";
 "settings.language.english" = "English";
-"settings.language.german" = "German";
+"settings.language.russian" = "Russian";
 "settings.language.hungarian" = "Hungarian";
 "settings.chooseTheme" = "Choose the dark or light side";
 "settings.lightmode" = "Light mode";
