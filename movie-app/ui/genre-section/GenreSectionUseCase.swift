@@ -11,6 +11,7 @@ import Combine
 protocol GenreSectionUseCase {
     var showAppearPopup: AnyPublisher<Bool, Never> { get }
     func loadGenres() -> AnyPublisher<[Genre], MovieError>
+    func loadMovies(genre: Genre, number: Int) -> AnyPublisher<[Movie], MovieError>
     func genresAppeared()
 }
 
@@ -40,6 +41,23 @@ class GenreSectionUseCaseImpl: GenreSectionUseCase {
         return genres
             .handleEvents(receiveOutput: { genres in
                 print("Custom action before receive: genres count = \(genres.count)")
+            })
+            .eraseToAnyPublisher()
+    }
+    
+    func loadMovies(genre: Genre, number: Int) -> AnyPublisher<[Movie], MovieError> {
+        let request = FetchMoviesRequest(genreId: genre.id, includeAdult: true)
+        
+        let movies = Environments.name == .tv ?
+        self.repository.fetchTV(req: request) :
+        self.repository.fetchMovies(req: request)
+        
+        return movies
+            .map { movies in
+                Array(movies.prefix(number))
+            }
+            .handleEvents(receiveOutput: { movies in
+                print("Custom action before receive: movies count = \(movies.count)")
             })
             .eraseToAnyPublisher()
     }

@@ -19,16 +19,27 @@ struct MovieCellView: View {
                         .frame(maxWidth: .infinity)
                         .cornerRadius(12)
                 }
-                
-                HStack(spacing: 6) {
-                    Image(.star)
-                    Text(String(format: "%.1f", movie.rating))
-                        .font(Fonts.labelBold)
+                HStack {
+                    HStack(spacing: 6) {
+                        Image(.star)
+                        Text(String(format: "%.1f", movie.rating))
+                            .font(Fonts.labelBold)
+                    }
+                    .padding(6)
+                    .background(Color.main.opacity(0.5))
+                    .cornerRadius(12)
+                    .padding(4)
+                    
+                    HStack(spacing: 6) {
+                        Image(.heart)
+                        Text(String(movie.voteCount))
+                            .font(Fonts.labelBold)
+                    }
+                    .padding(6)
+                    .background(Color.main.opacity(0.5))
+                    .cornerRadius(12)
+                    .padding(4)
                 }
-                .padding(6)
-                .background(Color.main.opacity(0.5))
-                .cornerRadius(12)
-                .padding(6)
             }
 
             HStack {

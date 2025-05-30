@@ -32,7 +32,7 @@ struct GenreSectionView: View {
                             }
                             .opacity(0)
                             
-                            GenreSectionCell(genre: genre)
+                            GenreSectionCell(genre: genre, movies: viewModel.getMovies(genre: genre))
                         }
                         .listRowBackground(Color.clear)
                         .listRowSeparator(.hidden)
