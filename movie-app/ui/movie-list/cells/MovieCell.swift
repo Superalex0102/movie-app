@@ -20,7 +20,6 @@ struct MovieCellView: View {
                         .cornerRadius(12)
                 }
                 
-                //TODO: Import star image and add new font
                 HStack(spacing: 6) {
                     Image(.star)
                     Text(String(format: "%.1f", movie.rating))
@@ -32,17 +31,23 @@ struct MovieCellView: View {
                 .padding(6)
             }
 
-            Text(movie.title)
-                .font(Fonts.subheading)
-                .lineLimit(2)
-
-            Text("\(movie.year)")
-                .font(Fonts.paragraph)
-
-            Text("\(movie.duration)")
-                .font(Fonts.caption)
-
-            Spacer()
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(movie.title)
+                        .font(Fonts.subheading)
+                        .lineLimit(2)
+                    
+                    Text("\(movie.year)")
+                        .font(Fonts.paragraph)
+                    
+                    Text("\(movie.duration)")
+                        .font(Fonts.caption)
+                }
+                
+                Spacer()
+                
+                Image(.playButton)
+            }
         }
     }
 }
