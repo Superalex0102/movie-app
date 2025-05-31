@@ -12,6 +12,7 @@ protocol GenreSectionUseCase {
     var showAppearPopup: AnyPublisher<Bool, Never> { get }
     func loadGenres() -> AnyPublisher<[Genre], MovieError>
     func loadMovies(genre: Genre, number: Int) -> AnyPublisher<[Movie], MovieError>
+    func loadMotdMovie(movie: Movie) -> AnyPublisher<MediaItemDetail, MovieError>
     func genresAppeared()
 }
 
@@ -59,6 +60,14 @@ class GenreSectionUseCaseImpl: GenreSectionUseCase {
             .handleEvents(receiveOutput: { movies in
                 print("Custom action before receive: movies count = \(movies.count)")
             })
+            .eraseToAnyPublisher()
+    }
+    
+    func loadMotdMovie(movie: Movie) -> AnyPublisher<MediaItemDetail, MovieError> {
+        let request = FetchDetailRequest(mediaId: movie.id)
+        let detailMediaItem = self.repository.fetchMovieDetail(req: request)
+        
+        return detailMediaItem
             .eraseToAnyPublisher()
     }
     
