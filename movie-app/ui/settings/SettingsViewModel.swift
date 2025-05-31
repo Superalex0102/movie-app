@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftUI
 
 protocol SettingsViewModelProtocol: ObservableObject {
     
@@ -15,13 +14,18 @@ protocol SettingsViewModelProtocol: ObservableObject {
 class SettingsViewModel: SettingsViewModelProtocol, ErrorPresentable {
     @Published var alertModel: AlertModel? = nil
     @Published var selectedLanguage: String = Bundle.getLangCode()
-    @Published var selectedTheme: ColorScheme = .light
     
-    @AppStorage("color-scheme") var colorSchemeRawValue: String = "light"
+    private let themeKey = "color-scheme"
+    
+    @Published var selectedTheme: Theme {
+        didSet {
+            UserDefaults.standard.set(selectedTheme.rawValue, forKey: themeKey)
+        }
+    }
     
     init() {
-        let currentSystemScheme = UITraitCollection.current.userInterfaceStyle
-        self.selectedTheme = ColorScheme(colorSchemeRawValue)
+        let storedTheme = UserDefaults.standard.string(forKey: themeKey)
+        self.selectedTheme = Theme(rawValue: storedTheme ?? "") ?? .light
     }
     
     func changeSelectedLanguage(_ language: String) {
@@ -29,20 +33,7 @@ class SettingsViewModel: SettingsViewModelProtocol, ErrorPresentable {
         Bundle.setLanguage(lang: language)
     }
     
-    func changeTheme(_ theme: ColorScheme) {
+    func changeTheme(_ theme: Theme) {
         self.selectedTheme = theme
-        colorSchemeRawValue = theme == .light ? "light" : "dark"
-    }
-    
-    //let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-}
-
-extension ColorScheme {
-    var rawValue: String {
-        self == .light ? "light" : "dark"
-    }
-    
-    init(_ rawValue: String) {
-        self = rawValue == "light" ? .light : .dark
     }
 }
