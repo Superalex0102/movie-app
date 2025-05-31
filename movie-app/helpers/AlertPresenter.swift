@@ -13,8 +13,8 @@ struct AlertModifier: ViewModifier {
     func body(content: Content) -> some View {
         content.alert(item: $model) { model in
             Alert(
-                title: Text(LocalizedStringKey(model.title)),
-                message: Text(LocalizedStringKey(model.message)),
+                title: Text(model.title.localized()),
+                message: Text(model.message.localized()),
                 dismissButton: .default(Text(model.dismissButtonTitle)) {
                     self.model = nil
                 }

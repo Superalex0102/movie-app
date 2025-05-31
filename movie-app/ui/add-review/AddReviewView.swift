@@ -23,7 +23,7 @@ struct AddReviewView: View {
                 LoadImageView(url: mediaItemDetail.imageUrl)
                     .frame(height: 185)
                     .cornerRadius(30)
-                Text(LocalizedStringKey("addReview.subTitle"))
+                Text("addReview.subTitle".localized())
                     .font(Fonts.detailsTitle)
                 HStack {
                     Spacer()

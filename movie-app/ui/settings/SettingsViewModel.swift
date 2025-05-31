@@ -8,9 +8,32 @@
 import Foundation
 
 protocol SettingsViewModelProtocol: ObservableObject {
-    // TODO: Add settings related properties and methods
+    
 }
 
-class SettingsViewModel: SettingsViewModelProtocol {
-    // TODO: Implement settings functionality
-} 
+class SettingsViewModel: SettingsViewModelProtocol, ErrorPresentable {
+    @Published var alertModel: AlertModel? = nil
+    @Published var selectedLanguage: String = Bundle.getLangCode()
+    
+    private let themeKey = "color-scheme"
+    
+    @Published var selectedTheme: Theme {
+        didSet {
+            UserDefaults.standard.set(selectedTheme.rawValue, forKey: themeKey)
+        }
+    }
+    
+    init() {
+        let storedTheme = UserDefaults.standard.string(forKey: themeKey)
+        self.selectedTheme = Theme(rawValue: storedTheme ?? "") ?? .light
+    }
+    
+    func changeSelectedLanguage(_ language: String) {
+        self.selectedLanguage = language
+        Bundle.setLanguage(lang: language)
+    }
+    
+    func changeTheme(_ theme: Theme) {
+        self.selectedTheme = theme
+    }
+}

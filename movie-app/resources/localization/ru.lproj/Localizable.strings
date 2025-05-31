@@ -1,0 +1,37 @@
+/* 
+  Localizable.strings
+  movie-app
+
+  Created by Alexander Dominik Somogyi on 2025. 04. 08..
+  
+*/
+
+"genreSection.title" = "Приложение о фильмах";
+"search.empty.title" = "Начните печатать,\nчтобы выполнить поиск";
+"search.textfield.placeholder" = "Фильмы, Режиссер, Актер, Актриса и т.д.";
+"button.close.text" = "Закрыть";
+"unexpected.error.title" = "Неожиданная ошибка";
+"unexpected.error.message" = "Что-то пошло не так. Пожалуйста, попробуйте позже.";
+"favoriteMovies.title" = "Избранное";
+"detail.rate.button" = "Оценить фильм";
+"detail.imdb.button" = "Посетить на IMDB";
+"detail.releaseDate" = "Дата выхода";
+"detail.runtime" = "Продолжительность";
+"detail.language" = "Язык";
+"detail.overview" = "Синопсис";
+"detail.publishers" = "Издатели и компании";
+"detail.cast" = "Актерский состав";
+"available" = "Доступно";
+"unavailable" = "Недоступно";
+"noInternet" = "Нет подключения к интернету";
+"addReview.subTitle" = "Оставьте честный отзыв";
+"addReview.buttonTitle" = "Отправить отзыв";
+
+"settings.title" = "Настройки";
+"settings.chooseLanguage" = "Выберите язык";
+"settings.language.english" = "Английский";
+"settings.language.russian" = "Orosz :)";
+"settings.language.hungarian" = "Венгерский";
+"settings.chooseTheme" = "Выберите светлую или тёмную сторону";
+"settings.lightmode" = "Светлый режим";
+"settings.darkmode" = "Тёмный режим";

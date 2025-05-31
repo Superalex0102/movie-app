@@ -8,21 +8,31 @@
 
 "genreSection.title" = "Filmek alkalmazás";
 "search.empty.title" = "Kezdj el gépelni\na kereséshez";
-"search.textfield.placeholder" = "Movies, Director, Actor, Actress, etc.";
+"search.textfield.placeholder" = "Filmek, rendező, színész, színésznő, stb.";
 "button.close.text" = "Bezárás";
 "unexpected.error.title" = "Váratlan hiba";
-"unexpected.error.message" = "Váratlab hiba történt. Kérjük próbálja meg később.";
+"unexpected.error.message" = "Váratlan hiba történt. Kérjük, próbálja meg később.";
 "favouriteMovies.title" = "Kedvencek";
-"detail.rate.button" = "Rate this movie";
-"detail.imdb.button" = "Visit at IMDB";
-"detail.releaseDate" = "Release Date";
-"detail.runtime" = "Runtime";
-"detail.language" = "Language";
-"detail.overview" = "Synopsis";
-"detail.publishers" = "Publisher and companies";
-"detail.cast" = "Cast";
-"available" = "Available";
-"unavailable" = "Unavailable";
-"noInternet" = "No internet connection";
-"addReview.subTitle" = "Give it  a honest review";
-"addReview.buttonTitle" = "Send my review";
+"detail.rate.button" = "Értékeld ezt a filmet";
+"detail.imdb.button" = "Megtekintés az IMDB-n";
+"detail.releaseDate" = "Megjelenés dátuma";
+"detail.runtime" = "Időtartam";
+"detail.language" = "Nyelv";
+"detail.overview" = "Összefoglaló";
+"detail.publishers" = "Kiadók és cégek";
+"detail.cast" = "Szereplők";
+"available" = "Elérhető";
+"unavailable" = "Nem elérhető";
+"noInternet" = "Nincs internetkapcsolat";
+"addReview.subTitle" = "Adj őszinte értékelést";
+"addReview.buttonTitle" = "Küldd el az értékelésem";
+
+"settings.title" = "Beállítások";
+"settings.chooseLanguage" = "Válassz nyelvet";
+"settings.language.english" = "Angol";
+"settings.language.russian" = "Orosz";
+"settings.language.hungarian" = "Magyar";
+"settings.chooseTheme" = "Válassz világos vagy sötét módot";
+"settings.lightmode" = "Világos mód";
+"settings.darkmode" = "Sötét mód";
+
