@@ -25,17 +25,25 @@ struct GenreSectionView: View {
                     }
                     .ignoresSafeArea()
                     
-                    List(viewModel.genres) { genre in
-                        ZStack {
-                            NavigationLink(destination: MovieListView(genre: genre)) {
-                                EmptyView()
-                            }
-                            .opacity(0)
-                            
-                            GenreSectionCell(genre: genre, movies: viewModel.getMovies(genre: genre))
+                    List {
+                        if let motd = viewModel.motdMovie {
+                            GenreMotdCell(mediaItem: motd)
+                            .background(Color.clear)
+                            .listStyle(.plain)
                         }
-                        .listRowBackground(Color.clear)
-                        .listRowSeparator(.hidden)
+                        
+                        ForEach(viewModel.genres) { genre in
+                            ZStack {
+                                NavigationLink(destination: MovieListView(genre: genre)) {
+                                    EmptyView()
+                                }
+                                .opacity(0)
+                                
+                                GenreSectionCell(genre: genre, movies: viewModel.getMovies(genre: genre))
+                            }
+                            .listRowBackground(Color.clear)
+                            .listRowSeparator(.hidden)
+                        }
                     }
                     .background(Color.clear)
                     .listStyle(.plain)
