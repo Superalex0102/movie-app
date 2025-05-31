@@ -19,6 +19,7 @@ struct MovieCellView: View {
                         .frame(maxWidth: .infinity)
                         .cornerRadius(12)
                 }
+                //TODO: spacing between the two HStack is not correct
                 HStack {
                     HStack(spacing: 6) {
                         Image(.star)
@@ -30,6 +31,7 @@ struct MovieCellView: View {
                     .cornerRadius(12)
                     .padding(4)
                     
+                    //TODO: better format for voteCount
                     HStack(spacing: 6) {
                         Image(.heart)
                         Text(String(movie.voteCount))

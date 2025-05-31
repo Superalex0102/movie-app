@@ -19,6 +19,7 @@ struct GenreMovieCell: View {
                         .cornerRadius(12)
                 }
                 
+                //TODO: add heart implementation
                 HStack(spacing: 6) {
                     Image(.star)
                     Text(String(format: "%.1f", movie.rating))
