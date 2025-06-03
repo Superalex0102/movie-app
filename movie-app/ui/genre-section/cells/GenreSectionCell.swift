@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import Shimmer
 
 struct GenreSectionCell: View {
     var genre: Genre
     var movies: [Movie]
+    
+    @State var isExpanded: Bool = false
     
     var body: some View {
         VStack {
@@ -19,14 +22,25 @@ struct GenreSectionCell: View {
                     .foregroundStyle(.primary)
                     .accessibilityLabel(genre.name)
                 Spacer()
-                Image(.rightArrow)
+                RotatingArrow(isExpanded: self.isExpanded)
+                    .onTapGesture {
+                        isExpanded.toggle()
+                    }
             }
             
             ScrollView(.horizontal, showsIndicators: false) {
+                
+                //TODO: the id should be different with shimmering
                 LazyHStack(spacing: 20.0) {
                     ForEach(self.movies) { movie in
                         NavigationLink(destination: DetailView(mediaItem: movie)) {
-                            GenreMovieCell(movie: movie)
+                            if movie.id <= 0 {
+                                Rectangle()
+                                    .frame(width: 200, height: 100)
+                                    .shimmering()
+                            } else {
+                                GenreMovieCell(movie: movie)
+                            }
                         }
                         .buttonStyle(PlainButtonStyle())
                     }

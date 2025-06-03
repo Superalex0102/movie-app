@@ -47,15 +47,13 @@ class GenreSectionUseCaseImpl: GenreSectionUseCase {
     }
     
     func loadMovies(genre: Genre, number: Int) -> AnyPublisher<[Movie], MovieError> {
-        let request = FetchMoviesRequest(genreId: genre.id, includeAdult: true)
+        let request = FetchMoviesRequest(genreId: genre.id, includeAdult: true, page: 1)
         
-        let movies = Environments.name == .tv ?
-        self.repository.fetchTV(req: request) :
-        self.repository.fetchMovies(req: request)
+        let movies = self.repository.fetchMovies(req: request)
         
         return movies
             .map { movies in
-                Array(movies.prefix(number))
+                Array(movies.movies.prefix(number))
             }
             .handleEvents(receiveOutput: { movies in
                 print("Custom action before receive: movies count = \(movies.count)")
@@ -68,7 +66,6 @@ class GenreSectionUseCaseImpl: GenreSectionUseCase {
         let detailMediaItem = self.repository.fetchMovieDetail(req: request)
         
         return detailMediaItem
-            .eraseToAnyPublisher()
     }
     
     func genresAppeared() {

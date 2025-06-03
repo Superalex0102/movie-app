@@ -16,6 +16,9 @@ protocol MovieListViewModelProtocol: ObservableObject {
 class MovieListViewModel: MovieListViewModelProtocol, ErrorPresentable {
     @Published var movies: [Movie] = []
     @Published var alertModel: AlertModel? = nil
+    @Published var isLoading: Bool = false
+    
+    var actualPage: Int = 0
     
     let genreIdSubject = PassthroughSubject<Int, Never>()
     
@@ -26,23 +29,26 @@ class MovieListViewModel: MovieListViewModelProtocol, ErrorPresentable {
     
     init() {
         
+        //TODO: check totalPage, so it doesn't throw an exception
         genreIdSubject
-            .flatMap { [weak self] genreId -> AnyPublisher<[Movie], MovieError> in
+            .flatMap { [weak self] genreId -> AnyPublisher<MoviePage, MovieError> in
+                self?.isLoading = true
                 guard let self = self else {
                     preconditionFailure("There is no self")
                 }
-                let request = FetchMoviesRequest(genreId: genreId, includeAdult: true)
-                return Environments.name == .tv ?
-                                                self.repository.fetchTV(req: request) :
-                                                self.repository.fetchMovies(req: request)
+                self.actualPage += 1
+                let request = FetchMoviesRequest(genreId: genreId, includeAdult: true, page: actualPage)
+                return self.repository.fetchMovies(req: request)
                 
             }
+            .delay(for: .seconds(2), scheduler: RunLoop.main)
             .sink { [weak self] completion in
                 if case let .failure(error) = completion {
                     self?.alertModel = self?.toAlertModel(error)
                 }
-            } receiveValue: { [weak self] movies in
-                self?.movies = movies
+            } receiveValue: { [weak self] moviePage in
+                self?.movies.append(contentsOf: moviePage.movies)
+                self?.isLoading = false
             }
             .store(in: &cancellables)
     }

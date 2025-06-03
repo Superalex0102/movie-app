@@ -11,7 +11,6 @@ protocol GenreSectionViewModel: ObservableObject {
     func loadMotdMovie(movie: Movie)
     func genresAppeared()
     func getMovies(genre: Genre) -> [Movie]
-    func getMotdMovie() -> MediaItemDetail
 }
 
 class GenreSectionViewModelImpl: GenreSectionViewModel, ErrorPresentable {
@@ -61,6 +60,7 @@ class GenreSectionViewModelImpl: GenreSectionViewModel, ErrorPresentable {
     
     func loadMovies(genre: Genre, number: Int) {
         useCase.loadMovies(genre: genre, number: number)
+            .delay(for: .seconds(3), scheduler: RunLoop.main)
             .sink { completion in
                 if case let .failure(error) = completion {
                     self.alertModel = self.toAlertModel(error)
@@ -92,13 +92,6 @@ class GenreSectionViewModelImpl: GenreSectionViewModel, ErrorPresentable {
     }
     
     func getMovies(genre: Genre) -> [Movie] {
-        moviesByGenre[genre] ?? []
-    }
-    
-    func getMotdMovie() -> MediaItemDetail {
-        guard let motd = motdMovie else {
-            fatalError("motdMovie is unexpectedly nil.")
-        }
-        return motd
+        moviesByGenre[genre] ?? Array(repeating: Movie(), count: 5)
     }
 }

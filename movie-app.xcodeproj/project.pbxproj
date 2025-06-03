@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		D67ADAAB2DAA65DE00DEDCF1 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = D67ADAAA2DAA65DE00DEDCF1 /* CombineMoya */; };
 		D67ADAAD2DAA65DE00DEDCF1 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = D67ADAAC2DAA65DE00DEDCF1 /* Moya */; };
+		D6A6A3502DEB0AF500A1FFB3 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = D6A6A34F2DEB0AF400A1FFB3 /* Lottie */; };
+		D6A6A35B2DEB19DB00A1FFB3 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = D6A6A35A2DEB19DB00A1FFB3 /* Shimmer */; };
 		D6AD67962DD88248005651E3 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D6AD67952DD88248005651E3 /* RealmSwift */; };
 		D6AD67A22DD897F7005651E3 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D6AD67A12DD897F7005651E3 /* SDWebImageSwiftUI */; };
 		D6AD67A72DD89C7C005651E3 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = D6AD67A62DD89C7C005651E3 /* Reachability */; };
@@ -49,10 +51,12 @@
 				D6AD67A22DD897F7005651E3 /* SDWebImageSwiftUI in Frameworks */,
 				D6AD67A72DD89C7C005651E3 /* Reachability in Frameworks */,
 				D67ADAAD2DAA65DE00DEDCF1 /* Moya in Frameworks */,
+				D6A6A35B2DEB19DB00A1FFB3 /* Shimmer in Frameworks */,
 				D67ADAAB2DAA65DE00DEDCF1 /* CombineMoya in Frameworks */,
 				D6EC33AA2DAE853900961270 /* InjectPropertyWrapper in Frameworks */,
 				D6AD67962DD88248005651E3 /* RealmSwift in Frameworks */,
 				D6EC33AD2DAE854E00961270 /* Swinject in Frameworks */,
+				D6A6A3502DEB0AF500A1FFB3 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +106,8 @@
 				D6AD67952DD88248005651E3 /* RealmSwift */,
 				D6AD67A12DD897F7005651E3 /* SDWebImageSwiftUI */,
 				D6AD67A62DD89C7C005651E3 /* Reachability */,
+				D6A6A34F2DEB0AF400A1FFB3 /* Lottie */,
+				D6A6A35A2DEB19DB00A1FFB3 /* Shimmer */,
 			);
 			productName = "movie-app";
 			productReference = D6833DBD2DA51949001C4548 /* movie-app.app */;
@@ -140,6 +146,8 @@
 				D6AD67942DD88248005651E3 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				D6AD67A02DD897F7005651E3 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				D6AD67A52DD89C7C005651E3 /* XCRemoteSwiftPackageReference "Reachability" */,
+				D6A6A34E2DEB0AF400A1FFB3 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				D6A6A3592DEB19DB00A1FFB3 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D6833DBE2DA51949001C4548 /* Products */;
@@ -760,6 +768,22 @@
 				minimumVersion = 15.0.3;
 			};
 		};
+		D6A6A34E2DEB0AF400A1FFB3 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.2;
+			};
+		};
+		D6A6A3592DEB19DB00A1FFB3 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/markiv/SwiftUI-Shimmer";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.1;
+			};
+		};
 		D6AD67942DD88248005651E3 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift";
@@ -812,6 +836,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D67ADAA92DAA65DE00DEDCF1 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		D6A6A34F2DEB0AF400A1FFB3 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D6A6A34E2DEB0AF400A1FFB3 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+		D6A6A35A2DEB19DB00A1FFB3 /* Shimmer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D6A6A3592DEB19DB00A1FFB3 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
+			productName = Shimmer;
 		};
 		D6AD67952DD88248005651E3 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
