@@ -11,6 +11,7 @@ import Combine
 
 protocol MovieListViewModelProtocol: ObservableObject {
     var movies: [Movie] { get }
+    func resetAndFetch(genreId: Int)
 }
 
 class MovieListViewModel: MovieListViewModelProtocol, ErrorPresentable {
@@ -51,5 +52,11 @@ class MovieListViewModel: MovieListViewModelProtocol, ErrorPresentable {
                 self?.isLoading = false
             }
             .store(in: &cancellables)
+    }
+    
+    func resetAndFetch(genreId: Int) {
+        actualPage = 0
+        movies.removeAll()
+        genreIdSubject.send(genreId)
     }
 }
