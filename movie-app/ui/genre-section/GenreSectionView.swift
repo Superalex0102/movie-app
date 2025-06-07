@@ -7,6 +7,7 @@
 
 import SwiftUI
 import InjectPropertyWrapper
+import Shimmer
 
 struct GenreSectionView: View {
     

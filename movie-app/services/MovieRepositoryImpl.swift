@@ -15,7 +15,7 @@ protocol MovieRepository {
     func fetchGenres(req: FetchGenreRequest) -> AnyPublisher<[Genre], MovieError>
     func fetchTVGenres(req: FetchGenreRequest) -> AnyPublisher<[Genre], MovieError>
     func searchMovies(req: SearchMovieRequest) -> AnyPublisher<[Movie], MovieError>
-    func fetchMovies(req: FetchMoviesRequest) -> AnyPublisher<[Movie], MovieError>
+    func fetchMovies(req: FetchMoviesRequest) -> AnyPublisher<MoviePage, MovieError>
     func fetchTV(req: FetchMoviesRequest) -> AnyPublisher<[Movie], MovieError>
     func fetchFavouriteMovies(req: FetchFavouriteMovieRequest, fromLocal: Bool) -> AnyPublisher<[Movie], MovieError>
     func editFavouriteMovie(req: EditFavouriteRequest) -> AnyPublisher<EditFavouriteResult, MovieError>
@@ -65,11 +65,11 @@ class MovieRepositoryImpl: MovieRepository {
         )
     }
     
-    func fetchMovies(req: FetchMoviesRequest) -> AnyPublisher<[Movie], MovieError> {
+    func fetchMovies(req: FetchMoviesRequest) -> AnyPublisher<MoviePage, MovieError> {
         requestAndTransform(
             target: MultiTarget(MoviesApi.fetchMovies(req: req)),
             decodeTo: MoviePageResponse.self,
-            transform: { $0.results.map(Movie.init(dto:)) }
+            transform: { MoviePage(dto: $0) }
         )
     }
     
