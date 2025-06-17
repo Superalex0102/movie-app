@@ -10,7 +10,8 @@ import SwiftUI
 struct StarView: View {
     let index: Int
     let isFilled: Bool
-    let onTap: () -> Void
+    var size: CGFloat = 40.0
+    let onTap: (() -> Void)?
 
     var body: some View {
         Image(isFilled ? .starFilled : .starUnfilled)
@@ -18,7 +19,7 @@ struct StarView: View {
             .aspectRatio(contentMode: .fit)
             .frame(width: 40.0, height: 40.0)
             .onTapGesture {
-                onTap()
+                onTap?()
             }
     }
 }

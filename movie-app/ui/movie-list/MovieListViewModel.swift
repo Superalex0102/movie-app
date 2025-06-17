@@ -11,7 +11,6 @@ import Combine
 
 protocol MovieListViewModelProtocol: ObservableObject {
     var movies: [Movie] { get }
-    func resetAndFetch(genreId: Int)
 }
 
 class MovieListViewModel: MovieListViewModelProtocol, ErrorPresentable {
@@ -23,16 +22,23 @@ class MovieListViewModel: MovieListViewModelProtocol, ErrorPresentable {
     
     let genreIdSubject = PassthroughSubject<Int, Never>()
     
+    let refreshSubject = CurrentValueSubject<Void, Never>(())
+    
     private var cancellables = Set<AnyCancellable>()
     
     @Inject
     private var repository: MovieRepository
     
     init() {
+        let refreshPublisher = refreshSubject
+            .handleEvents(receiveOutput: { [weak self]_ in
+                self?.movies = []
+                self?.actualPage = 0
+            })
         
         //TODO: check totalPage, so it doesn't throw an exception
-        genreIdSubject
-            .flatMap { [weak self] genreId -> AnyPublisher<MoviePage, MovieError> in
+        Publishers.CombineLatest(genreIdSubject, refreshPublisher)
+            .flatMap { [weak self] (genreId, _) -> AnyPublisher<MoviePage, MovieError> in
                 self?.isLoading = true
                 guard let self = self else {
                     preconditionFailure("There is no self")
@@ -52,11 +58,5 @@ class MovieListViewModel: MovieListViewModelProtocol, ErrorPresentable {
                 self?.isLoading = false
             }
             .store(in: &cancellables)
-    }
-    
-    func resetAndFetch(genreId: Int) {
-        actualPage = 0
-        movies.removeAll()
-        genreIdSubject.send(genreId)
     }
 }
