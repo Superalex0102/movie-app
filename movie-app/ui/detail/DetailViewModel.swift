@@ -15,6 +15,7 @@ protocol DetailViewModelProtocol: ObservableObject {
 class DetailViewModel: DetailViewModelProtocol, ErrorPresentable {
     @Published var mediaItemDetail: MediaItemDetail = MediaItemDetail()
     @Published var credits: [CastMember] = []
+    @Published var movies: [Movie] = []
     @Published var isFavourite: Bool = false
     @Published var alertModel: AlertModel? = nil
     
@@ -51,18 +52,28 @@ class DetailViewModel: DetailViewModelProtocol, ErrorPresentable {
                 return self.repository.fetchMovieCredits(req: request)
             }
         
-        Publishers.CombineLatest(details, credits)
+        let movies = mediaItemIdSubject
+            .flatMap { [weak self]mediaItemId in
+                guard let self = self else {
+                    preconditionFailure("There is no self")
+                }
+                let request = FetchSimilarMovieRequest(mediaItemId: mediaItemId, page: 1)
+                return self.repository.fetchSimilarMovie(req: request)
+            }
+        
+        Publishers.CombineLatest3(details, credits, movies)
             .receive(on: RunLoop.main)
             .sink { [weak self] completion in
                 if case let .failure(error) = completion {
                     self?.alertModel = self?.toAlertModel(error)
                 }
-            } receiveValue: { [weak self] details, credits in
+            } receiveValue: { [weak self] details, credits, movies in
                 guard let self = self else {
                     preconditionFailure("There is no self")
                 }
                 self.mediaItemDetail = details
                 self.credits = credits
+                self.movies = movies
                 self.isFavourite = self.mediaItemStore.isMediaItemStored(withId: details.id)
             }
             .store(in: &cancellables)
