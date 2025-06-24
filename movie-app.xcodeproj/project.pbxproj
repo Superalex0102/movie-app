@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		D67ADAAB2DAA65DE00DEDCF1 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = D67ADAAA2DAA65DE00DEDCF1 /* CombineMoya */; };
 		D67ADAAD2DAA65DE00DEDCF1 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = D67ADAAC2DAA65DE00DEDCF1 /* Moya */; };
+		D67E6AB32E01792E00651B2C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D67E6AB22E01792E00651B2C /* FirebaseAnalytics */; };
+		D67E6AB52E01792E00651B2C /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = D67E6AB42E01792E00651B2C /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		D67E6AB72E01792E00651B2C /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = D67E6AB62E01792E00651B2C /* FirebaseCrashlytics */; };
 		D6A6A3502DEB0AF500A1FFB3 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = D6A6A34F2DEB0AF400A1FFB3 /* Lottie */; };
 		D6A6A35B2DEB19DB00A1FFB3 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = D6A6A35A2DEB19DB00A1FFB3 /* Shimmer */; };
 		D6AD67962DD88248005651E3 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D6AD67952DD88248005651E3 /* RealmSwift */; };
@@ -52,10 +55,13 @@
 				D6AD67A72DD89C7C005651E3 /* Reachability in Frameworks */,
 				D67ADAAD2DAA65DE00DEDCF1 /* Moya in Frameworks */,
 				D6A6A35B2DEB19DB00A1FFB3 /* Shimmer in Frameworks */,
+				D67E6AB52E01792E00651B2C /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				D67ADAAB2DAA65DE00DEDCF1 /* CombineMoya in Frameworks */,
 				D6EC33AA2DAE853900961270 /* InjectPropertyWrapper in Frameworks */,
 				D6AD67962DD88248005651E3 /* RealmSwift in Frameworks */,
 				D6EC33AD2DAE854E00961270 /* Swinject in Frameworks */,
+				D67E6AB72E01792E00651B2C /* FirebaseCrashlytics in Frameworks */,
+				D67E6AB32E01792E00651B2C /* FirebaseAnalytics in Frameworks */,
 				D6A6A3502DEB0AF500A1FFB3 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -108,6 +114,9 @@
 				D6AD67A62DD89C7C005651E3 /* Reachability */,
 				D6A6A34F2DEB0AF400A1FFB3 /* Lottie */,
 				D6A6A35A2DEB19DB00A1FFB3 /* Shimmer */,
+				D67E6AB22E01792E00651B2C /* FirebaseAnalytics */,
+				D67E6AB42E01792E00651B2C /* FirebaseAnalyticsWithoutAdIdSupport */,
+				D67E6AB62E01792E00651B2C /* FirebaseCrashlytics */,
 			);
 			productName = "movie-app";
 			productReference = D6833DBD2DA51949001C4548 /* movie-app.app */;
@@ -148,6 +157,7 @@
 				D6AD67A52DD89C7C005651E3 /* XCRemoteSwiftPackageReference "Reachability" */,
 				D6A6A34E2DEB0AF400A1FFB3 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				D6A6A3592DEB19DB00A1FFB3 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
+				D67E6AB12E01792E00651B2C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D6833DBE2DA51949001C4548 /* Products */;
@@ -265,7 +275,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.asomogyi.movie-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -353,7 +363,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.asomogyi.movie-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -504,7 +514,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.asomogyi.movie-app.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -535,7 +545,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.asomogyi.movie-app.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -629,7 +639,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.asomogyi.movie-app.tv";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENV_TV;
@@ -718,7 +728,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.asomogyi.movie-app.tv";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENV_TV;
@@ -766,6 +776,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 15.0.3;
+			};
+		};
+		D67E6AB12E01792E00651B2C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.14.0;
 			};
 		};
 		D6A6A34E2DEB0AF400A1FFB3 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
@@ -836,6 +854,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D67ADAA92DAA65DE00DEDCF1 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		D67E6AB22E01792E00651B2C /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D67E6AB12E01792E00651B2C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		D67E6AB42E01792E00651B2C /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D67E6AB12E01792E00651B2C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		D67E6AB62E01792E00651B2C /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D67E6AB12E01792E00651B2C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
 		};
 		D6A6A34F2DEB0AF400A1FFB3 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;

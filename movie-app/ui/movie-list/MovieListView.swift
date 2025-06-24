@@ -37,7 +37,7 @@ struct MovieListView: View {
             viewModel.genreIdSubject.send(genre.id)
         }
         .refreshable {
-            viewModel.resetAndFetch(genreId: genre.id)
+            viewModel.refreshSubject.send()
         }
     }
 }
