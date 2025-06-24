@@ -12,7 +12,7 @@ struct CastDetail: Codable, Identifiable {
     let name: String
     let biography: String?
     let popularity: Double
-    let imagePath: URL?
+    let imagePath: String?
     let originPlace: String?
     let birthYear: String?
     
@@ -26,7 +26,7 @@ struct CastDetail: Codable, Identifiable {
         birthYear = nil
     }
     
-    init(id: Int, name: String, biography: String, popularity: Double, imagePath: URL?, originPlace: String?, birthYear: String?) {
+    init(id: Int, name: String, biography: String, popularity: Double, imagePath: String?, originPlace: String?, birthYear: String?) {
         self.id = id
         self.name = name
         self.biography = biography
@@ -36,23 +36,28 @@ struct CastDetail: Codable, Identifiable {
         self.birthYear = birthYear
     }
     
-    init(dto: CastDetailResponse) {
+    init(dto: CastMemberDetailResponse) {
         id = dto.id
         name = dto.name
         biography = dto.biography
         popularity = dto.popularity
-        imagePath = dto.profilePath.flatMap { URL(string: "https://image.tmdb.org/t/p/w185\($0)") }
+        imagePath = dto.profilePath
         originPlace = dto.placeOfBirth
         birthYear = dto.birthday
     }
     
     init(dto: CompanyDetailResponse) {
         id = dto.id
-        imagePath = dto.logoPath.flatMap { URL(string: "https://image.tmdb.org/t/p/w500\($0)") }
+        imagePath = dto.logoPath
         name = dto.name
         biography = dto.description
         popularity = 0
         originPlace = dto.originCountry
         birthYear = nil
+    }
+    
+    var profileImageURL: URL? {
+        guard let imagePath = imagePath else { return nil }
+        return URL(string: "https://image.tmdb.org/t/p/w500\(imagePath)")
     }
 }

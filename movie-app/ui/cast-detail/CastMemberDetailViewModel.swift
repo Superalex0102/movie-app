@@ -23,12 +23,12 @@ enum CastDetailType {
     case company(id: Int)
 }
 
-class CastDetailViewModel: ObservableObject, ErrorPresentable {
+class CastMemberDetailViewModel: ObservableObject, ErrorPresentable {
     @Published var castDetail: CastDetail?
     @Published var alertModel: AlertModel? = nil
     @Published var rating: Int = 0
     
-    let participantTypeSubject = PassthroughSubject<CastDetailType, Never>()
+    let castTypeSubject = PassthroughSubject<CastDetailType, Never>()
     
     @Inject
     private var repository: MovieRepository
@@ -36,13 +36,19 @@ class CastDetailViewModel: ObservableObject, ErrorPresentable {
     private var cancellables = Set<AnyCancellable>()
     
     init() {
-        participantTypeSubject
-            .flatMap { [weak self] participantType -> AnyPublisher<CastDetail, MovieError> in
+        castTypeSubject
+            .flatMap { [weak self] castType -> AnyPublisher<CastDetail, MovieError> in
                 guard let self = self else {
                     return Fail(error: MovieError.unexpectedError).eraseToAnyPublisher()
                 }
-                let request = FetchParticipantDetailRequest(participantId: participantType.id)
-                return self.repository.fetchCastDetail(req: request)
+                let request = FetchCastMemberDetailRequest(castMemberId: castType.id)
+                switch castType {
+                case .castMember:
+                    return self.repository.fetchCastMemberDetail(req: request)
+                case .company:
+                    return self.repository.fetchCompanyDetail(req: request)
+                }
+                
             }
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { [weak self] completion in

@@ -1,13 +1,13 @@
 //
-//  PersonDetail.swift
+//  CastMemberDetailResponse.swift
 //  movie-app
 //
-//  Created by Alexander Dominik Somogyi on 2025. 06. 14..
+//  Created by Alexander Dominik Somogyi on 2025. 06. 24..
 //
 
 import Foundation
 
-struct CastMemberDetail : Codable, Identifiable {
+struct CastMemberDetailResponse: Codable, Identifiable {
     let adult: Bool
     let alsoKnownAs: [String]
     let biography: String

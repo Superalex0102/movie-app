@@ -17,7 +17,7 @@ struct ParticipantScrollView: View {
     
     enum NavigationType {
         case none
-        case person
+        case castMember
         case company
     }
     
@@ -36,14 +36,16 @@ struct ParticipantScrollView: View {
                             switch navigationType {
                             case .none:
                                 ParticipantCell(imageUrl: participant.imageUrl, title: participant.name)
-                            case .person:
-                                NavigationLink(destination: CastDetailView(castDetailType: .castMember)) {
+                            case .castMember:
+                                NavigationLink(destination: CastMemberDetailView(castDetailType: .castMember(id: participant.id))) {
                                     ParticipantCell(imageUrl: participant.imageUrl, title: participant.name)
                                 }
+                                .buttonStyle(PlainButtonStyle())
                             case .company:
-                                NavigationLink(destination: CastDetailView(castDetailType: .company)) {
+                                NavigationLink(destination: CastMemberDetailView(castDetailType: .company(id: participant.id))) {
                                     ParticipantCell(imageUrl: participant.imageUrl, title: participant.name)
                                 }
+                                .buttonStyle(PlainButtonStyle())
                             }
                         }
                         .offset(CGSize(width: LayoutConst.maxPadding, height: 0))

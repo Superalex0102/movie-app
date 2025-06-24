@@ -5,10 +5,12 @@
 //  Created by Alexander Dominik Somogyi on 2025. 06. 14..
 //
 
+//FIXME: mapping error happens
+
 import SwiftUI
 
-struct CastDetailView: View {
-    @StateObject private var viewModel = CastDetailViewModel()
+struct CastMemberDetailView: View {
+    @StateObject private var viewModel = CastMemberDetailViewModel()
     @Environment(\.dismiss) private var dismiss
     
     let castDetailType: CastDetailType
@@ -20,18 +22,18 @@ struct CastDetailView: View {
             
             VStack {
                 ScrollView {
-                    if let cast = viewModel.castDetail {
+                    if let castMember = viewModel.castDetail {
                         VStack(alignment: .leading, spacing: 24) {
                             HStack {
                                 Spacer()
-                                LoadImageView(url: cast.imagePath)
+                                LoadImageView(url: castMember.profileImageURL)
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: 370, height: 185)
                                     .cornerRadius(20)
                                 Spacer()
                             }
                             
-                            Text(cast.name)
+                            Text(castMember.name)
                                 .font(Fonts.detailsTitle)
                                 .foregroundColor(Color.primary)
                                 .padding(.horizontal)
@@ -41,7 +43,7 @@ struct CastDetailView: View {
                                     Text("Birth year")
                                         .font(Fonts.caption)
                                         .foregroundColor(Color.primary)
-                                    Text(cast.birthYear ?? "N/A")
+                                    Text(castMember.birthYear ?? "" )
                                         .font(Fonts.paragraph)
                                         .foregroundColor(Color.primary)
                                 }
@@ -50,7 +52,7 @@ struct CastDetailView: View {
                                     Text("City")
                                         .font(Fonts.caption)
                                         .foregroundColor(Color.primary)
-                                    Text(cast.originPlace ?? "N/A")
+                                    Text(castMember.originPlace ?? "")
                                         .font(Fonts.paragraph)
                                         .foregroundColor(Color.primary)
                                 }
@@ -62,7 +64,7 @@ struct CastDetailView: View {
                                 Text("Bio")
                                     .font(Fonts.caption)
                                     .foregroundColor(Color.primary)
-                                Text(cast.biography ?? "N/A")
+                                Text(castMember.biography ?? "")
                                     .font(Fonts.paragraph)
                                     .foregroundColor(Color.primary)
                             }
@@ -81,7 +83,7 @@ struct CastDetailView: View {
                             .padding(.horizontal)
                             
                         }
-                        .padding(.vertical, 48)
+                        .padding(.bottom, 48)
                     } else {
                         ProgressView()
                     }
@@ -90,7 +92,7 @@ struct CastDetailView: View {
         }
         .showAlert(model: $viewModel.alertModel)
         .onAppear {
-            viewModel.participantTypeSubject.send(castDetailType)
+            viewModel.castTypeSubject.send(castDetailType)
         }
     }
 }
