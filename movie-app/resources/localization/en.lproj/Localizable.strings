@@ -21,6 +21,7 @@
 "detail.overview" = "Synopsis";
 "detail.publishers" = "Publisher and companies";
 "detail.cast" = "Cast";
+"detail.similar" = "Similar";
 "available" = "Available";
 "unavailable" = "Unavailable";
 "noInternet" = "No internet connection";

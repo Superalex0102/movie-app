@@ -23,6 +23,7 @@ protocol MovieRepository {
     func fetchMovieCredits(req: FetchMovieCreditsRequest) -> AnyPublisher<[CastMember], MovieError>
     func fetchCastMemberDetail(req: FetchCastMemberDetailRequest) -> AnyPublisher<CastDetail, MovieError>
     func fetchCompanyDetail(req: FetchCastMemberDetailRequest) -> AnyPublisher<CastDetail, MovieError>
+    func fetchSimilarMovie(req: FetchSimilarMovieRequest) -> AnyPublisher<[Movie], MovieError>
 //    func addReview(req: AddReviewRequest) -> AnyPublisher<[ModifyMediaResult], MovieError>
 }
 
@@ -187,6 +188,14 @@ class MovieRepositoryImpl: MovieRepository {
             target: MultiTarget(MoviesApi.fetchCompanyDetail(req: req)),
             decodeTo: CompanyDetailResponse.self,
             transform: {  CastDetail(dto: $0) }
+        )
+    }
+    
+    func fetchSimilarMovie(req: FetchSimilarMovieRequest) -> AnyPublisher<[Movie], MovieError> {
+        requestAndTransform(
+            target: MultiTarget(MoviesApi.fetchSimiliarMovie(req: req)),
+            decodeTo: MoviePageResponse.self,
+            transform: { $0.results.map(Movie.init(dto:)) }
         )
     }
     

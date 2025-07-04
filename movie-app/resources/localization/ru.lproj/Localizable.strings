@@ -21,6 +21,7 @@
 "detail.overview" = "Синопсис";
 "detail.publishers" = "Издатели и компании";
 "detail.cast" = "Актерский состав";
+"detail.similar" = "Similar";
 "available" = "Доступно";
 "unavailable" = "Недоступно";
 "noInternet" = "Нет подключения к интернету";

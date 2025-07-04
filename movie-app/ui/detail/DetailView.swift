@@ -21,6 +21,10 @@ struct DetailView: View {
             viewModel.credits
         }
         
+        var movies: [Movie] {
+            viewModel.movies
+        }
+        
         return ScrollView {
             VStack(alignment: .leading, spacing: LayoutConst.largePadding) {
                 LoadImageView(url: mediaItemDetail.imageUrl)
@@ -63,6 +67,8 @@ struct DetailView: View {
                 ParticipantScrollView(title: "detail.publishers".localized(), participants: mediaItemDetail.productionCompanies, navigationType: .company)
                 
                 ParticipantScrollView(title: "detail.cast".localized(), participants: credits, navigationType: .castMember)
+                
+                SimilarMovieView(title: "detail.similar".localized(), movies: movies)
                 
 //                ReviewScrollView(reviews: viewModel.reviews)
             }

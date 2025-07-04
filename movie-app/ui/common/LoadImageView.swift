@@ -13,15 +13,22 @@ struct LoadImageView: View {
     let url: URL?
     
     var body: some View {
-        WebImage(url: url) { image in
-            image
-                .resizable()
-                .scaledToFill()
-        } placeholder: {
+        if let url = url {
+            WebImage(url: url) { image in
+                image
+                    .resizable()
+                    .scaledToFill()
+            } placeholder: {
+                ZStack {
+                    Color.gray.opacity(0.3)
+                        .shimmering()
+                    ProgressView()
+                }
+            }
+        } else {
             ZStack {
                 Color.gray.opacity(0.3)
-                    .shimmering()
-//                ProgressView()
+                Image(systemName: "photo")
             }
         }
     }
