@@ -28,9 +28,12 @@ struct GenreSectionView: View {
                     
                     List {
                         if let motd = viewModel.motdMovie {
-                            GenreMotdCell(mediaItem: motd)
+                            NavigationLink(destination: DetailView(mediaItem: Movie(detail: motd))) {
+                                GenreMotdCell(mediaItem: motd)
+                            }
+                            .listRowBackground(Color.clear)
                             .background(Color.clear)
-                            .listStyle(.plain)
+                            .buttonStyle(PlainButtonStyle())
                         }
                         
                         ForEach(viewModel.genres) { genre in

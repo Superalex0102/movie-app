@@ -55,9 +55,9 @@ extension MoviesApi: TargetType {
         case .fetchMovieCredits(req: let req):
             return "movie/\(req.mediaId)/credits"
         case .fetchCastMemberDetail(req: let req):
-            return "movie/\(req.castMemberId)"
+            return "person/\(req.castMemberId)"
         case .fetchCompanyDetail(req: let req):
-            return "movie/\(req.castMemberId)"
+            return "company/\(req.castMemberId)"
         case .fetchSimiliarMovie(req: let req):
             return "movie/\(req.mediaItemId)/similar"
 //        case .addReview(req: let req):

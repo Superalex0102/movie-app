@@ -61,6 +61,7 @@ class DetailViewModel: DetailViewModelProtocol, ErrorPresentable {
                 return self.repository.fetchSimilarMovie(req: request)
             }
         
+        //TODO: add pagination for similar movies loading.
         Publishers.CombineLatest3(details, credits, movies)
             .receive(on: RunLoop.main)
             .sink { [weak self] completion in
