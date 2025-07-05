@@ -21,7 +21,7 @@ enum MoviesApi {
     case fetchCastMemberDetail(req: FetchCastMemberDetailRequest)
     case fetchCompanyDetail(req: FetchCastMemberDetailRequest)
     case fetchSimiliarMovie(req: FetchSimilarMovieRequest)
-//    case addReview(req: AddReviewRequest)
+    case addReview(req: AddReviewRequest)
 }
 
 extension MoviesApi: TargetType {
@@ -60,8 +60,8 @@ extension MoviesApi: TargetType {
             return "company/\(req.castMemberId)"
         case .fetchSimiliarMovie(req: let req):
             return "movie/\(req.mediaItemId)/similar"
-//        case .addReview(req: let req):
-//            return "movie/\(req.mediaId)/rating"
+        case .addReview(req: let req):
+            return "movie/\(req.mediaId)/rating"
         }
     }
     
@@ -69,7 +69,7 @@ extension MoviesApi: TargetType {
         switch self {
         case .fetchGenres, .fetchTVGenres, .fetchMovies, .fetchTV, .searchMovies, .fetchFavouriteMovies, . fetchMovieDetail, .fetchMovieCredits, .fetchCastMemberDetail, .fetchCompanyDetail, .fetchSimiliarMovie:
             return .get
-        case .editFavouriteMovie:
+        case .editFavouriteMovie, .addReview:
             return .post
         }
     }
@@ -90,7 +90,6 @@ extension MoviesApi: TargetType {
         case let .fetchFavouriteMovies(req):
             return .requestParameters(parameters: req.asRequestParams(), encoding: URLEncoding.queryString)
         case .editFavouriteMovie(req: let req):
-            //return .requestParameters(parameters: req.asRequestParams(), encoding: URLEncoding.httpBody)
             let request = EditFavouriteBodyRequest(movieId: req.movieId, isFavourite: req.isFavourite)
                 return .requestJSONEncodable(request)
         case .fetchMovieDetail(req: let req):
@@ -103,10 +102,9 @@ extension MoviesApi: TargetType {
             return .requestParameters(parameters: [:], encoding: URLEncoding.queryString)
         case let .fetchSimiliarMovie(req):
             return .requestParameters(parameters: req.asRequestParams(), encoding: URLEncoding.queryString)
-//        case .addReview(req: let req):
-//            //return .requestParameters(parameters: req.asRequestParams(), encoding: URLEncoding.httpBody)
-//            let request = AddReviewBodyRequest(movieId: req.movieId, isFavourite: req.isFavourite)
-//                return .requestJSONEncodable(request)
+        case .addReview(req: let req):
+            let request = AddReviewBodyRequest(mediaId: req.mediaId, rating: req.rating)
+                return .requestJSONEncodable(request)
         }
     }
     
@@ -142,6 +140,11 @@ extension MoviesApi: TargetType {
             return ["Authorization": req.accessToken]
         case .fetchSimiliarMovie(req: let req):
             return ["Authorization": req.accessToken]
+        case .addReview(req: let req):
+            return [
+                "Authorization": req.accessToken,
+                "accept": "application/json"
+            ]
         }
     }
     

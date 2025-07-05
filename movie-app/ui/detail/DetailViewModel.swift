@@ -80,7 +80,7 @@ class DetailViewModel: DetailViewModelProtocol, ErrorPresentable {
             .store(in: &cancellables)
 
         favouriteButtonTapped
-            .flatMap { [weak self] _ -> AnyPublisher<(EditFavouriteResult, Bool), MovieError> in
+            .flatMap { [weak self] _ -> AnyPublisher<(ModifyMediaResult, Bool), MovieError> in
                 guard let self = self else {
                     preconditionFailure("There is no self")
                 }

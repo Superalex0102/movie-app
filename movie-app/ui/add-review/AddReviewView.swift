@@ -11,6 +11,8 @@ struct AddReviewView: View {
     
     let mediaItemDetail: MediaItemDetail
     
+    @Environment
+    
     @StateObject private var viewModel = AddReviewViewModel()
     
     var body: some View {
@@ -40,6 +42,9 @@ struct AddReviewView: View {
         .padding(.horizontal, LayoutConst.maxPadding)
         .onAppear {
             viewModel.mediaDetailSubject.send(mediaItemDetail)
+        }
+        .onChange(of: viewModel.success) {
+            dismiss()
         }
     }
 }
