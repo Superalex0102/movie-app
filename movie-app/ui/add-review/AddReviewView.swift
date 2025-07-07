@@ -11,7 +11,7 @@ struct AddReviewView: View {
     
     let mediaItemDetail: MediaItemDetail
     
-    @Environment
+    @Environment(\.dismiss) private var dismiss
     
     @StateObject private var viewModel = AddReviewViewModel()
     
@@ -31,7 +31,10 @@ struct AddReviewView: View {
                     Spacer()
                     VStack (spacing: 72.0){
                         StarRatingView(rating: $viewModel.selectedRating)
-                        StyledButton(style: .filled, action: .simple, title: "addReview.buttonTitle")
+                        StyledButton(style: .filled, action: .simple, title: "addReview.buttonTitle".localized())
+                            .onTapGesture {
+                                viewModel.sendReviewSubject.send(())
+                            }
                     }
                     Spacer()
                 }
