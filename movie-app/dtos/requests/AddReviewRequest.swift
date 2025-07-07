@@ -7,26 +7,23 @@
 
 struct AddReviewBodyRequest: Encodable {
     let mediaId: Int
-    let rating: Int
-    let mediaType = "movie"
+    let rating: Double
     
     enum CodingKeys: String, CodingKey {
         case mediaId = "media_id"
         case rating = "value"
-        case mediaType = "media_type"
     }
 }
 
 struct AddReviewRequest: Encodable {
     let accessToken: String = Config.bearerToken
     let mediaId: Int
-    let rating: Int
+    let rating: Double
     
     func asRequestParams() -> [String: Any] {
         return [
             "mediaId": mediaId,
             "rating": rating,
-            "mediaType": "movie"
         ]
     }
 }
