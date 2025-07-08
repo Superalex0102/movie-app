@@ -19,7 +19,6 @@ class SearchViewModel: SearchViewModelProtocol, ErrorPresentable {
     @Published var searchText: String = ""
     @Published var alertModel: AlertModel? = nil
     
-    
     let startSearch = PassthroughSubject<Void, Never>()
     
     private var cancellables = Set<AnyCancellable>()

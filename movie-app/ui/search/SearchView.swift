@@ -64,6 +64,9 @@ struct SearchView: View {
                 }
             }
         }
+        .onAppear {
+            viewModel.startSearch.send(())
+        }
     }
 }
 

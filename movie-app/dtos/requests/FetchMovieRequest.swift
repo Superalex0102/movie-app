@@ -5,7 +5,7 @@
 //  Created by Alexander Dominik Somogyi on 2025. 04. 15..
 //
 
-struct FetchMoviesRequest {
+struct FetchMoviesRequest: LocalizedRequestable {
     let accessToken: String = Config.bearerToken
     let genreId: Int
     let includeAdult: Bool
@@ -16,6 +16,6 @@ struct FetchMoviesRequest {
             "with_genres": genreId,
             "include_adult": includeAdult,
             "page": page,
-        ]
+        ] + languageParam
     }
 }

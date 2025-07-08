@@ -18,6 +18,7 @@ class SettingsViewModel: SettingsViewModelProtocol, ErrorPresentable {
     private let themeKey = "color-scheme"
     
     @Published var selectedTheme: Theme {
+        //ensures that any time selectedTheme is changed, it saves the new value to UserDefaults
         didSet {
             UserDefaults.standard.set(selectedTheme.rawValue, forKey: themeKey)
         }
