@@ -17,7 +17,7 @@ struct EditFavouriteBodyRequest: Encodable {
     }
 }
 
-struct EditFavouriteRequest: Encodable {
+struct EditFavouriteRequest: Encodable, LocalizedRequestable {
     let accessToken: String = Config.bearerToken
     let accountId: Int = Config.accountID
     let movieId: Int
@@ -28,6 +28,6 @@ struct EditFavouriteRequest: Encodable {
             "media_type": "movie",
             "media_id": movieId,
             "favorite": isFavourite
-        ]
+        ] + languageParam
     }
 }

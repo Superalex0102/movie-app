@@ -6,10 +6,10 @@
 //
 
 
-struct FetchGenreRequest {
+struct FetchGenreRequest: LocalizedRequestable {
     let accessToken: String = Config.bearerToken
     
-    func asRequestParams() -> [String: String] {
-        return [:]
+    func asRequestParams() -> [String: Any] {
+        return languageParam
     }
 }

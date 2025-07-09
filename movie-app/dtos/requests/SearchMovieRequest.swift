@@ -5,13 +5,13 @@
 //  Created by Alexander Dominik Somogyi on 2025. 04. 26..
 //
 
-struct SearchMovieRequest {
+struct SearchMovieRequest: LocalizedRequestable {
     let accessToken: String = Config.bearerToken
     let query: String
     
     func asRequestParams() -> [String: Any] {
         return [
             "query": query
-        ]
+        ] + languageParam
     }
 } 
