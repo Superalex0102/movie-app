@@ -27,7 +27,7 @@ struct GenreSectionView: View {
                     .ignoresSafeArea()
                     
                     List {
-                        if let motd = viewModel.motdMovie {
+                        if let motd = viewModel.trendingMediaItem {
                             NavigationLink(destination: DetailView(mediaItem: Movie(detail: motd))) {
                                 GenreMotdCell(mediaItem: motd)
                             }
@@ -43,7 +43,7 @@ struct GenreSectionView: View {
                                 }
                                 .opacity(0)
                                 
-                                GenreSectionCell(genre: genre, movies: viewModel.getMovies(genre: genre))
+                                GenreSectionCell(genre: genre, movies: viewModel.getMediaItems(genre: genre))
                             }
                             .listRowBackground(Color.clear)
                             .listRowSeparator(.hidden)
@@ -58,6 +58,7 @@ struct GenreSectionView: View {
             .showAlert(model: $viewModel.alertModel)
             .onAppear {
                 viewModel.loadGenres()
+                viewModel.loadTrendingMediaItem()
                 viewModel.genresAppeared()
             }
         }

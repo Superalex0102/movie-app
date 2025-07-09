@@ -22,6 +22,7 @@ enum MoviesApi {
     case fetchCompanyDetail(req: FetchCastMemberDetailRequest)
     case fetchSimiliarMovie(req: FetchSimilarMovieRequest)
     case addReview(req: AddReviewRequest)
+    case fetchTrendingMovie(req: FetchTrendingMovieRequest)
 }
 
 extension MoviesApi: TargetType {
@@ -62,12 +63,14 @@ extension MoviesApi: TargetType {
             return "movie/\(req.mediaItemId)/similar"
         case .addReview(req: let req):
             return "movie/\(req.mediaId)/rating"
+        case .fetchTrendingMovie(req: let req):
+            return "trending/movie/\(req.timeWindow)"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .fetchGenres, .fetchTVGenres, .fetchMovies, .fetchTV, .searchMovies, .fetchFavouriteMovies, . fetchMovieDetail, .fetchMovieCredits, .fetchCastMemberDetail, .fetchCompanyDetail, .fetchSimiliarMovie:
+        case .fetchGenres, .fetchTVGenres, .fetchMovies, .fetchTV, .searchMovies, .fetchFavouriteMovies, . fetchMovieDetail, .fetchMovieCredits, .fetchCastMemberDetail, .fetchCompanyDetail, .fetchSimiliarMovie, .fetchTrendingMovie:
             return .get
         case .editFavouriteMovie, .addReview:
             return .post
@@ -105,6 +108,8 @@ extension MoviesApi: TargetType {
         case .addReview(req: let req):
             let request = AddReviewBodyRequest(mediaId: req.mediaId, rating: req.rating)
                 return .requestJSONEncodable(request)
+        case let .fetchTrendingMovie(req):
+            return .requestParameters(parameters: req.asRequestParams(), encoding: URLEncoding.queryString)
         }
     }
     
@@ -145,6 +150,8 @@ extension MoviesApi: TargetType {
                 "Authorization": req.accessToken,
                 "accept": "application/json"
             ]
+        case .fetchTrendingMovie(req: let req):
+            return ["Authorization": req.accessToken]
         }
     }
     

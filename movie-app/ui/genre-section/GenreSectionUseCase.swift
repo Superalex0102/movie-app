@@ -11,8 +11,9 @@ import Combine
 protocol GenreSectionUseCase {
     var showAppearPopup: AnyPublisher<Bool, Never> { get }
     func loadGenres() -> AnyPublisher<[Genre], MovieError>
-    func loadMovies(genre: Genre, number: Int) -> AnyPublisher<[Movie], MovieError>
-    func loadMotdMovie(movie: Movie) -> AnyPublisher<MediaItemDetail, MovieError>
+    func loadMediaItems(genre: Genre, number: Int) -> AnyPublisher<[Movie], MovieError>
+    func loadDetailMediaItem(movie: Movie) -> AnyPublisher<MediaItemDetail, MovieError>
+    func loadTrendingMediaItem() -> AnyPublisher<[Movie], MovieError>
     func genresAppeared()
 }
 
@@ -46,7 +47,7 @@ class GenreSectionUseCaseImpl: GenreSectionUseCase {
             .eraseToAnyPublisher()
     }
     
-    func loadMovies(genre: Genre, number: Int) -> AnyPublisher<[Movie], MovieError> {
+    func loadMediaItems(genre: Genre, number: Int) -> AnyPublisher<[Movie], MovieError> {
         let request = FetchMoviesRequest(genreId: genre.id, includeAdult: true, page: 1)
         
         let movies = self.repository.fetchMovies(req: request)
@@ -61,11 +62,18 @@ class GenreSectionUseCaseImpl: GenreSectionUseCase {
             .eraseToAnyPublisher()
     }
     
-    func loadMotdMovie(movie: Movie) -> AnyPublisher<MediaItemDetail, MovieError> {
+    func loadDetailMediaItem(movie: Movie) -> AnyPublisher<MediaItemDetail, MovieError> {
         let request = FetchDetailRequest(mediaId: movie.id)
         let detailMediaItem = self.repository.fetchMovieDetail(req: request)
         
         return detailMediaItem
+    }
+    
+    func loadTrendingMediaItem() -> AnyPublisher<[Movie], MovieError> {
+        let request = FetchTrendingMovieRequest(timeWindow: "day", page: 1)
+        let trendingMovies = self.repository.fetchTrendingMovie(req: request)
+        
+        return trendingMovies
     }
     
     func genresAppeared() {
