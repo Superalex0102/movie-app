@@ -16,6 +16,7 @@ class DetailViewModel: DetailViewModelProtocol, ErrorPresentable {
     @Published var mediaItemDetail: MediaItemDetail = MediaItemDetail()
     @Published var credits: [CastMember] = []
     @Published var movies: [Movie] = []
+    @Published var reviews: [MovieReview] = []
     @Published var isFavourite: Bool = false
     @Published var alertModel: AlertModel? = nil
     
@@ -39,7 +40,7 @@ class DetailViewModel: DetailViewModelProtocol, ErrorPresentable {
                 guard let self = self else {
                     preconditionFailure("There is no self")
                 }
-                let request = FetchDetailRequest(mediaId: mediaItemId)
+                let request = FetchMovieDetailRequest(mediaId: mediaItemId)
                 return self.repository.fetchMovieDetail(req: request)
             }
         
@@ -61,20 +62,30 @@ class DetailViewModel: DetailViewModelProtocol, ErrorPresentable {
                 return self.repository.fetchSimilarMovie(req: request)
             }
         
+        let reviews = mediaItemIdSubject
+            .flatMap { [weak self]mediaItemId in
+                guard let self = self else {
+                    preconditionFailure("There is no self")
+                }
+                let request = FetchMovieReviewsRequest(mediaId: mediaItemId, page: 1)
+                return self.repository.fetchMovieReviews(req: request)
+            }
+        
         //TODO: add pagination for similar movies loading.
-        Publishers.CombineLatest3(details, credits, movies)
+        Publishers.CombineLatest4(details, credits, movies, reviews)
             .receive(on: RunLoop.main)
             .sink { [weak self] completion in
                 if case let .failure(error) = completion {
                     self?.alertModel = self?.toAlertModel(error)
                 }
-            } receiveValue: { [weak self] details, credits, movies in
+            } receiveValue: { [weak self] details, credits, movies, reviews in
                 guard let self = self else {
                     preconditionFailure("There is no self")
                 }
                 self.mediaItemDetail = details
                 self.credits = credits
                 self.movies = movies
+                self.reviews = reviews
                 self.isFavourite = self.mediaItemStore.isMediaItemStored(withId: details.id)
             }
             .store(in: &cancellables)

@@ -13,6 +13,7 @@
 "unexpected.error.title" = "Неожиданная ошибка";
 "unexpected.error.message" = "Что-то пошло не так. Пожалуйста, попробуйте позже.";
 "favoriteMovies.title" = "Избранное";
+
 "detail.rate.button" = "Оценить фильм";
 "detail.imdb.button" = "Посетить на IMDB";
 "detail.releaseDate" = "Дата выхода";
@@ -21,6 +22,7 @@
 "detail.overview" = "Синопсис";
 "detail.publishers" = "Издатели и компании";
 "detail.cast" = "Актерский состав";
+"detail.reviews" = "Top Reviews";
 "detail.similar" = "Similar";
 "available" = "Доступно";
 "unavailable" = "Недоступно";
@@ -36,3 +38,7 @@
 "settings.chooseTheme" = "Выберите светлую или тёмную сторону";
 "settings.lightmode" = "Светлый режим";
 "settings.darkmode" = "Тёмный режим";
+
+"app.rate.title" = "Értékeld az alkalmazást!";
+"app.rate.message" = "Sokat segítenél nekünk, ha adnál értékelést!";
+"app.rate.button" = "Rendben";

@@ -63,7 +63,7 @@ class GenreSectionUseCaseImpl: GenreSectionUseCase {
     }
     
     func loadDetailMediaItem(movie: Movie) -> AnyPublisher<MediaItemDetail, MovieError> {
-        let request = FetchDetailRequest(mediaId: movie.id)
+        let request = FetchMovieDetailRequest(mediaId: movie.id)
         let detailMediaItem = self.repository.fetchMovieDetail(req: request)
         
         return detailMediaItem
