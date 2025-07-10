@@ -13,6 +13,7 @@
 "unexpected.error.title" = "Unexpected Error";
 "unexpected.error.message" = "Something went wrong. Please try again later";
 "favouriteMovies.title" = "Favourites";
+
 "detail.rate.button" = "Rate this movie";
 "detail.imdb.button" = "Visit at IMDB";
 "detail.releaseDate" = "Release Date";
@@ -21,6 +22,7 @@
 "detail.overview" = "Synopsis";
 "detail.publishers" = "Publisher and companies";
 "detail.cast" = "Cast";
+"detail.reviews" = "Top Reviews";
 "detail.similar" = "Similar";
 "available" = "Available";
 "unavailable" = "Unavailable";
@@ -36,3 +38,7 @@
 "settings.chooseTheme" = "Choose the dark or light side";
 "settings.lightmode" = "Light mode";
 "settings.darkmode" = "Dark mode";
+
+"app.rate.title" = "Értékeld az alkalmazást!";
+"app.rate.message" = "Sokat segítenél nekünk, ha adnál értékelést!";
+"app.rate.button" = "Rendben";

@@ -19,13 +19,14 @@ protocol MovieRepository {
     func fetchTV(req: FetchMoviesRequest) -> AnyPublisher<[Movie], MovieError>
     func fetchFavouriteMovies(req: FetchFavouriteMovieRequest, fromLocal: Bool) -> AnyPublisher<[Movie], MovieError>
     func editFavouriteMovie(req: EditFavouriteRequest) -> AnyPublisher<ModifyMediaResult, MovieError>
-    func fetchMovieDetail(req: FetchDetailRequest) -> AnyPublisher<MediaItemDetail, MovieError>
+    func fetchMovieDetail(req: FetchMovieDetailRequest) -> AnyPublisher<MediaItemDetail, MovieError>
     func fetchMovieCredits(req: FetchMovieCreditsRequest) -> AnyPublisher<[CastMember], MovieError>
     func fetchCastMemberDetail(req: FetchCastMemberDetailRequest) -> AnyPublisher<CastDetail, MovieError>
     func fetchCompanyDetail(req: FetchCastMemberDetailRequest) -> AnyPublisher<CastDetail, MovieError>
     func fetchSimilarMovie(req: FetchSimilarMovieRequest) -> AnyPublisher<[Movie], MovieError>
     func addReview(req: AddReviewRequest) -> AnyPublisher<ModifyMediaResult, MovieError>
     func fetchTrendingMovie(req: FetchTrendingMovieRequest) -> AnyPublisher<[Movie], MovieError>
+    func fetchMovieReviews(req: FetchMovieReviewsRequest) -> AnyPublisher<[MovieReview], MovieError>
 }
 
 class MovieRepositoryImpl: MovieRepository {
@@ -120,7 +121,7 @@ class MovieRepositoryImpl: MovieRepository {
                 .eraseToAnyPublisher()
         }
     
-    func fetchMovieDetail(req: FetchDetailRequest) -> AnyPublisher<MediaItemDetail, MovieError> {
+    func fetchMovieDetail(req: FetchMovieDetailRequest) -> AnyPublisher<MediaItemDetail, MovieError> {
         
         let serviceResponse: AnyPublisher<MediaItemDetail, MovieError> = self.requestAndTransform(
             target: MultiTarget(MoviesApi.fetchMovieDetail(req: req)),
@@ -207,6 +208,14 @@ class MovieRepositoryImpl: MovieRepository {
             target: MultiTarget(MoviesApi.fetchTrendingMovie(req: req)),
             decodeTo: MoviePageResponse.self,
             transform: { $0.results.map(Movie.init(dto:)) }
+        )
+    }
+    
+    func fetchMovieReviews(req: FetchMovieReviewsRequest) -> AnyPublisher<[MovieReview], MovieError> {
+        requestAndTransform(
+            target: MultiTarget(MoviesApi.fetchMovieReviews(req: req)),
+            decodeTo: MovieReviewPageResponse.self,
+            transform: { $0.results.map(MovieReview.init(dto:)) }
         )
     }
     

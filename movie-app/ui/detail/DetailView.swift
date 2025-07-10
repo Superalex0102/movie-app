@@ -68,6 +68,8 @@ struct DetailView: View {
                 
                 ParticipantScrollView(title: "detail.cast".localized(), participants: credits, navigationType: .castMember)
                 
+                ReviewScrollView(reviews: viewModel.reviews)
+                
                 SimilarMovieView(title: "detail.similar".localized(), movies: movies)
                 
 //                ReviewScrollView(reviews: viewModel.reviews)

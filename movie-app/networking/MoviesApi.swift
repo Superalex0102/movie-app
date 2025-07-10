@@ -16,13 +16,14 @@ enum MoviesApi {
     case searchMovies(req: SearchMovieRequest)
     case editFavouriteMovie(req: EditFavouriteRequest)
     case fetchFavouriteMovies(req: FetchFavouriteMovieRequest)
-    case fetchMovieDetail(req: FetchDetailRequest)
+    case fetchMovieDetail(req: FetchMovieDetailRequest)
     case fetchMovieCredits(req: FetchMovieCreditsRequest)
     case fetchCastMemberDetail(req: FetchCastMemberDetailRequest)
     case fetchCompanyDetail(req: FetchCastMemberDetailRequest)
     case fetchSimiliarMovie(req: FetchSimilarMovieRequest)
     case addReview(req: AddReviewRequest)
     case fetchTrendingMovie(req: FetchTrendingMovieRequest)
+    case fetchMovieReviews(req: FetchMovieReviewsRequest)
 }
 
 extension MoviesApi: TargetType {
@@ -65,12 +66,14 @@ extension MoviesApi: TargetType {
             return "movie/\(req.mediaId)/rating"
         case .fetchTrendingMovie(req: let req):
             return "trending/movie/\(req.timeWindow)"
+        case .fetchMovieReviews(req: let req):
+            return "movie/\(req.mediaId)/reviews"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .fetchGenres, .fetchTVGenres, .fetchMovies, .fetchTV, .searchMovies, .fetchFavouriteMovies, . fetchMovieDetail, .fetchMovieCredits, .fetchCastMemberDetail, .fetchCompanyDetail, .fetchSimiliarMovie, .fetchTrendingMovie:
+        case .fetchGenres, .fetchTVGenres, .fetchMovies, .fetchTV, .searchMovies, .fetchFavouriteMovies, . fetchMovieDetail, .fetchMovieCredits, .fetchCastMemberDetail, .fetchCompanyDetail, .fetchSimiliarMovie, .fetchTrendingMovie, .fetchMovieReviews:
             return .get
         case .editFavouriteMovie, .addReview:
             return .post
@@ -109,6 +112,8 @@ extension MoviesApi: TargetType {
             let request = AddReviewBodyRequest(mediaId: req.mediaId, rating: req.rating)
                 return .requestJSONEncodable(request)
         case let .fetchTrendingMovie(req):
+            return .requestParameters(parameters: req.asRequestParams(), encoding: URLEncoding.queryString)
+        case let .fetchMovieReviews(req):
             return .requestParameters(parameters: req.asRequestParams(), encoding: URLEncoding.queryString)
         }
     }
@@ -151,6 +156,8 @@ extension MoviesApi: TargetType {
                 "accept": "application/json"
             ]
         case .fetchTrendingMovie(req: let req):
+            return ["Authorization": req.accessToken]
+        case .fetchMovieReviews(req: let req):
             return ["Authorization": req.accessToken]
         }
     }

@@ -5,7 +5,7 @@
 //  Created by Alexander Dominik Somogyi on 2025. 05. 10..
 //
 
-struct FetchDetailRequest: LocalizedRequestable {
+struct FetchMovieDetailRequest: LocalizedRequestable {
     let accessToken: String = Config.bearerToken
     let mediaId: Int
     
