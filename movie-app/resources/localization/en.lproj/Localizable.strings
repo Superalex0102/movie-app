@@ -38,6 +38,7 @@
 "settings.chooseTheme" = "Choose the dark or light side";
 "settings.lightmode" = "Light mode";
 "settings.darkmode" = "Dark mode";
+"settings.version" = "version: %@";
 
 "app.rate.title" = "Értékeld az alkalmazást!";
 "app.rate.message" = "Sokat segítenél nekünk, ha adnál értékelést!";

@@ -68,8 +68,9 @@ struct SettingsView: View {
                         
                         Spacer(minLength: 250)
                         
-                        VStack(alignment: .leading, spacing: 12.0) {
-                            Text("version: place version here")
+                        VStack(spacing: 12.0) {
+                            //Merge like this, so it would work with languages like Japanese
+                            Text(String(format: "settings.version".localized(), viewModel.version))
                                 .font(Fonts.overviewText)
                             Text("Created by place name here")
                                 .font(Fonts.overviewText)

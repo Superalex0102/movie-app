@@ -14,6 +14,7 @@ protocol SettingsViewModelProtocol: ObservableObject {
 class SettingsViewModel: SettingsViewModelProtocol, ErrorPresentable {
     @Published var alertModel: AlertModel? = nil
     @Published var selectedLanguage: String = Bundle.getLangCode()
+    @Published var version: String = Bundle.getVersionAndBuild()
     
     private let themeKey = "color-scheme"
     

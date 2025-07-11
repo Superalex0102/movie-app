@@ -39,6 +39,7 @@
 "settings.chooseTheme" = "Válassz világos vagy sötét módot";
 "settings.lightmode" = "Világos mód";
 "settings.darkmode" = "Sötét mód";
+"settings.version" = "version: %@";
 
 "app.rate.title" = "Értékeld az alkalmazást!";
 "app.rate.message" = "Sokat segítenél nekünk, ha adnál értékelést!";
