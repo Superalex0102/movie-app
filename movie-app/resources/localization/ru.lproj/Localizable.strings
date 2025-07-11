@@ -38,6 +38,7 @@
 "settings.chooseTheme" = "Выберите светлую или тёмную сторону";
 "settings.lightmode" = "Светлый режим";
 "settings.darkmode" = "Тёмный режим";
+"settings.version" = "version: %@";
 
 "app.rate.title" = "Értékeld az alkalmazást!";
 "app.rate.message" = "Sokat segítenél nekünk, ha adnál értékelést!";
