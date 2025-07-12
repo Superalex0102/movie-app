@@ -34,6 +34,7 @@ struct GenreSectionView: View {
                             .listRowBackground(Color.clear)
                             .background(Color.clear)
                             .buttonStyle(PlainButtonStyle())
+                            .listRowSeparator(.hidden)
                         }
                         
                         ForEach(viewModel.genres) { genre in

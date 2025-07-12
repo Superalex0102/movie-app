@@ -27,7 +27,7 @@ struct MovieLabel: View {
              text = String(format: "%.1f", value)
              imageRes = .star
          case .voteCount(let vote):
-             text = "\(vote)"
+             text = "\(NumberFormatterHelper.format(Double(vote)))"
              imageRes = .heart
          case .popularity(let popularity):
              text = "\(popularity)"
@@ -43,7 +43,7 @@ struct MovieLabel: View {
                  .font(Fonts.labelBold)
          }
          .padding(6.0)
-         .background(Color.main.opacity(0.5))
+         .background(Color.label)
          .cornerRadius(12)
      }
 }
