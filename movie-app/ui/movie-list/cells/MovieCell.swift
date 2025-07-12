@@ -7,22 +7,24 @@
 
 import SwiftUI
 
-struct MovieCellView: View {
+struct MovieCell: View {
     let movie: Movie
+    let width: CGFloat
+    let height: CGFloat
     
     var body: some View {
         VStack(alignment: .leading, spacing: LayoutConst.smallPadding) {
             ZStack(alignment: .topLeading) {
                 HStack(alignment: .center) {
                     LoadImageView(url: movie.imageUrl)
-                        .frame(height: 100)
-                        .frame(maxWidth: .infinity)
-                        .cornerRadius(12)
+                        .frame(width: width, height: height)
+                        .cornerRadius(30)
                 }
                 HStack {
                     MovieLabel(type: .rating(movie.rating))
                     MovieLabel(type: .voteCount(movie.voteCount))
                 }
+                .padding(LayoutConst.smallPadding)
             }
 
             HStack {
