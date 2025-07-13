@@ -44,6 +44,9 @@ class MovieRepositoryImpl: MovieRepository {
     private var castMemberStore: CastMemberStoreProtocol
     
     @Inject
+    private var movieReviewStore: MovieReviewStoreProtocol
+    
+    @Inject
     private var networkMonitor: NetworkMonitorProtocol
     
     func fetchGenres(req: FetchGenreRequest) -> AnyPublisher<[Genre], MovieError> {
@@ -141,6 +144,7 @@ class MovieRepositoryImpl: MovieRepository {
                     return serviceResponse
                 } else {
                     return localResponse
+                        .eraseToAnyPublisher()
                 }
             }
             .eraseToAnyPublisher()
@@ -212,11 +216,28 @@ class MovieRepositoryImpl: MovieRepository {
     }
     
     func fetchMovieReviews(req: FetchMovieReviewsRequest) -> AnyPublisher<[MovieReview], MovieError> {
-        requestAndTransform(
+        
+        let serviceResponse: AnyPublisher<[MovieReview], MovieError> = self.requestAndTransform(
             target: MultiTarget(MoviesApi.fetchMovieReviews(req: req)),
             decodeTo: MovieReviewPageResponse.self,
             transform: { $0.results.map(MovieReview.init(dto:)) }
         )
+            .handleEvents(receiveOutput: { [weak self]reviews in
+                self?.movieReviewStore.saveMovieReviews(reviews, forMovieId: req.mediaId)
+            })
+            .eraseToAnyPublisher()
+            
+        let localResponse: AnyPublisher<[MovieReview], MovieError> = movieReviewStore.getMovieReviews(fromMovieId: req.mediaId)
+            
+        return networkMonitor.isConnected
+            .flatMap { isConnected -> AnyPublisher<[MovieReview], MovieError> in
+                if isConnected {
+                    return serviceResponse
+                } else {
+                    return localResponse
+                }
+            }
+            .eraseToAnyPublisher()
     }
     
     private func requestAndTransform<ResponseType: Decodable, Output>(

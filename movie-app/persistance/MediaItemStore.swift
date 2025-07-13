@@ -33,11 +33,13 @@ class MediaItemStore: MediaItemStoreProtocol {
         }
         
         self.realm = realm
+        //Elindít egy megfigyelést (observeMediaItems()), amely figyeli a MediaItemEntity változásait.
         observeMediaItems()
     }
 
     private func observeMediaItems() {
         let results = realm.objects(MediaItemEntity.self)
+        //Bármilyen módosítás történik MediaItemEntity-n (pl. mentés, törlés), a subject-et frissíti Combine-on keresztül. Így a feliratkozók (pl. ViewModel) automatikusan értesülnek az adatok változásáról.
         notificationToken = results.observe { [weak self] changes in
             switch changes {
             case .initial(let items),
@@ -53,6 +55,7 @@ class MediaItemStore: MediaItemStoreProtocol {
         let entities = items.map { item in
             MediaItemEntity(from: item)
         }
+        // A domain modellből (MediaItem) adatbázis entitást készít (MediaItemEntity) Mentés történik, frissítésre is képes (.modified).
         try? realm.write {
             realm.add(entities, update: .modified)
         }
@@ -78,6 +81,7 @@ class MediaItemStore: MediaItemStoreProtocol {
     }
 
     deinit {
+        //Fontos memória-kezelés: leiratkozik a Realm megfigyelésről.
         notificationToken?.invalidate()
     }
 }

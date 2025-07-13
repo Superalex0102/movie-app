@@ -48,6 +48,9 @@ class ServiceAssembly: Assembly {
              return CastMemberStore()
         }.inObjectScope(.container)
         
+        container.register(MovieReviewStoreProtocol.self) { _ in
+            return MovieReviewStore()
+        }.inObjectScope(.container)
         
         container.register(MovieRepository.self) { _ in
             return MovieRepositoryImpl()

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D639DAA02E24293F00550EB2 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = D6AD67952DD88248005651E3 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D67ADAAB2DAA65DE00DEDCF1 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = D67ADAAA2DAA65DE00DEDCF1 /* CombineMoya */; };
 		D67ADAAD2DAA65DE00DEDCF1 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = D67ADAAC2DAA65DE00DEDCF1 /* Moya */; };
 		D67E6AB32E01792E00651B2C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D67E6AB22E01792E00651B2C /* FirebaseAnalytics */; };
@@ -20,6 +21,20 @@
 		D6EC33AA2DAE853900961270 /* InjectPropertyWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = D6EC33A92DAE853900961270 /* InjectPropertyWrapper */; };
 		D6EC33AD2DAE854E00961270 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = D6EC33AC2DAE854E00961270 /* Swinject */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D639DAA12E24293F00550EB2 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D639DAA02E24293F00550EB2 /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		D6833DBD2DA51949001C4548 /* movie-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "movie-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,6 +110,7 @@
 				D6833DB92DA51949001C4548 /* Sources */,
 				D6833DBA2DA51949001C4548 /* Frameworks */,
 				D6833DBB2DA51949001C4548 /* Resources */,
+				D639DAA12E24293F00550EB2 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
