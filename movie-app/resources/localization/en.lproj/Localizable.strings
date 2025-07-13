@@ -6,40 +6,40 @@
   
 */
 
-"genreSection.title" = "Movie app";
-"search.empty.title" = "Start typing\for search";
+"genreSection.title" = "Movie App";
+"search.empty.title" = "Start typing\nto search";
 "search.textfield.placeholder" = "Movies, Director, Actor, Actress, etc.";
 "button.close.text" = "Close";
 "unexpected.error.title" = "Unexpected Error";
-"unexpected.error.message" = "Something went wrong. Please try again later";
-"favouriteMovies.title" = "Favourites";
+"unexpected.error.message" = "Something went wrong. Please try again later.";
+"favouriteMovies.title" = "Favorites";
 
 "detail.rate.button" = "Rate this movie";
-"detail.imdb.button" = "Visit at IMDB";
+"detail.imdb.button" = "Visit on IMDb";
 "detail.releaseDate" = "Release Date";
 "detail.runtime" = "Runtime";
 "detail.language" = "Language";
 "detail.overview" = "Synopsis";
-"detail.publishers" = "Publisher and companies";
+"detail.publishers" = "Publishers and Companies";
 "detail.cast" = "Cast";
 "detail.reviews" = "Top Reviews";
 "detail.similar" = "Similar";
 "available" = "Available";
 "unavailable" = "Unavailable";
 "noInternet" = "No internet connection";
-"addReview.subTitle" = "Give it  a honest review";
-"addReview.buttonTitle" = "Send my review";
+"addReview.subTitle" = "Leave an honest review";
+"addReview.buttonTitle" = "Submit review";
 
 "settings.title" = "Settings";
 "settings.chooseLanguage" = "Choose Language";
 "settings.language.english" = "English";
 "settings.language.russian" = "Russian";
 "settings.language.hungarian" = "Hungarian";
-"settings.chooseTheme" = "Choose the dark or light side";
-"settings.lightmode" = "Light mode";
-"settings.darkmode" = "Dark mode";
-"settings.version" = "version: %@";
+"settings.chooseTheme" = "Choose light or dark mode";
+"settings.lightmode" = "Light Mode";
+"settings.darkmode" = "Dark Mode";
+"settings.version" = "Version: %@";
 
-"app.rate.title" = "Értékeld az alkalmazást!";
-"app.rate.message" = "Sokat segítenél nekünk, ha adnál értékelést!";
-"app.rate.button" = "Rendben";
+"app.rate.title" = "Rate the app!";
+"app.rate.message" = "You would help us a lot by leaving a rating!";
+"app.rate.button" = "OK";

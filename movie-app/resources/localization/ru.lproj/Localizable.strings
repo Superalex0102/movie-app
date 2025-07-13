@@ -8,22 +8,22 @@
 
 "genreSection.title" = "Приложение о фильмах";
 "search.empty.title" = "Начните печатать,\nчтобы выполнить поиск";
-"search.textfield.placeholder" = "Фильмы, Режиссер, Актер, Актриса и т.д.";
+"search.textfield.placeholder" = "Фильмы, режиссёры, актёры, актрисы и т.д.";
 "button.close.text" = "Закрыть";
 "unexpected.error.title" = "Неожиданная ошибка";
 "unexpected.error.message" = "Что-то пошло не так. Пожалуйста, попробуйте позже.";
 "favoriteMovies.title" = "Избранное";
 
 "detail.rate.button" = "Оценить фильм";
-"detail.imdb.button" = "Посетить на IMDB";
+"detail.imdb.button" = "Смотреть на IMDb";
 "detail.releaseDate" = "Дата выхода";
 "detail.runtime" = "Продолжительность";
 "detail.language" = "Язык";
-"detail.overview" = "Синопсис";
+"detail.overview" = "Описание";
 "detail.publishers" = "Издатели и компании";
-"detail.cast" = "Актерский состав";
-"detail.reviews" = "Top Reviews";
-"detail.similar" = "Similar";
+"detail.cast" = "Актёрский состав";
+"detail.reviews" = "Лучшие отзывы";
+"detail.similar" = "Похожие фильмы";
 "available" = "Доступно";
 "unavailable" = "Недоступно";
 "noInternet" = "Нет подключения к интернету";
@@ -33,13 +33,13 @@
 "settings.title" = "Настройки";
 "settings.chooseLanguage" = "Выберите язык";
 "settings.language.english" = "Английский";
-"settings.language.russian" = "Orosz :)";
+"settings.language.russian" = "Русский";
 "settings.language.hungarian" = "Венгерский";
-"settings.chooseTheme" = "Выберите светлую или тёмную сторону";
-"settings.lightmode" = "Светлый режим";
-"settings.darkmode" = "Тёмный режим";
-"settings.version" = "version: %@";
+"settings.chooseTheme" = "Выберите светлую или тёмную тему";
+"settings.lightmode" = "Светлая тема";
+"settings.darkmode" = "Тёмная тема";
+"settings.version" = "версия: %@";
 
-"app.rate.title" = "Értékeld az alkalmazást!";
-"app.rate.message" = "Sokat segítenél nekünk, ha adnál értékelést!";
-"app.rate.button" = "Rendben";
+"app.rate.title" = "Оцените приложение!";
+"app.rate.message" = "Вы очень поможете нам, оставив свою оценку!";
+"app.rate.button" = "Хорошо";
