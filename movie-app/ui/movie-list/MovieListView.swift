@@ -14,7 +14,7 @@ struct MovieListView: View {
             LazyVGrid(columns: columns, spacing: LayoutConst.largePadding) {
                 ForEach(Array(viewModel.movies.enumerated()), id: \.offset) { index, movie in
                     NavigationLink(destination: DetailView(mediaItem: movie)) {
-                        return MovieCellView(movie: movie)
+                        return MovieCell(movie: movie, width: 185.0, height: 100.0)
                             .onAppear {
                                 if index == viewModel.movies.count - 1 {
                                     viewModel.genreIdSubject.send(genre.id)

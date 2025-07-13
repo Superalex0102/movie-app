@@ -18,17 +18,10 @@ struct GenreMovieCell: View {
                         .frame(width: 200, height: 100)
                         .cornerRadius(12)
                 }
-                
-                //TODO: add heart implementation
-                HStack(spacing: 6) {
-                    Image(.star)
-                    Text(String(format: "%.1f", movie.rating))
-                        .font(Fonts.labelBold)
+                HStack {
+                    MovieLabel(type: .rating(movie.rating))
+                    MovieLabel(type: .voteCount(movie.voteCount))
                 }
-                .padding(6)
-                .background(Color.main.opacity(0.5))
-                .cornerRadius(12)
-                .padding(6)
             }
 
             HStack {

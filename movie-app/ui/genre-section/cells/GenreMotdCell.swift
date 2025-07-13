@@ -14,7 +14,7 @@ struct GenreMotdCell: View {
         ZStack(alignment: .bottomLeading) {
             LoadImageView(url: mediaItem.imageUrl)
                 .frame(width: 370, height: 185)
-                .cornerRadius(12)
+                .cornerRadius(30)
             
             HStack {
                 VStack(alignment: .leading) {
