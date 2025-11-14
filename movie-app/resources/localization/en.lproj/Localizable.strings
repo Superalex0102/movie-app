@@ -1,0 +1,45 @@
+/* 
+  Localizable.strings
+  movie-app
+
+  Created by Alexander Dominik Somogyi on 2025. 04. 08..
+  
+*/
+
+"genreSection.title" = "Movie App";
+"search.empty.title" = "Start typing\nto search";
+"search.textfield.placeholder" = "Movies, Director, Actor, Actress, etc.";
+"button.close.text" = "Close";
+"unexpected.error.title" = "Unexpected Error";
+"unexpected.error.message" = "Something went wrong. Please try again later.";
+"favouriteMovies.title" = "Favorites";
+
+"detail.rate.button" = "Rate this movie";
+"detail.imdb.button" = "Visit on IMDb";
+"detail.releaseDate" = "Release Date";
+"detail.runtime" = "Runtime";
+"detail.language" = "Language";
+"detail.overview" = "Synopsis";
+"detail.publishers" = "Publishers and Companies";
+"detail.cast" = "Cast";
+"detail.reviews" = "Top Reviews";
+"detail.similar" = "Similar";
+"available" = "Available";
+"unavailable" = "Unavailable";
+"noInternet" = "No internet connection";
+"addReview.subTitle" = "Leave an honest review";
+"addReview.buttonTitle" = "Submit review";
+
+"settings.title" = "Settings";
+"settings.chooseLanguage" = "Choose Language";
+"settings.language.english" = "English";
+"settings.language.russian" = "Russian";
+"settings.language.hungarian" = "Hungarian";
+"settings.chooseTheme" = "Choose light or dark mode";
+"settings.lightmode" = "Light Mode";
+"settings.darkmode" = "Dark Mode";
+"settings.version" = "Version: %@";
+
+"app.rate.title" = "Rate the app!";
+"app.rate.message" = "You would help us a lot by leaving a rating!";
+"app.rate.button" = "OK";

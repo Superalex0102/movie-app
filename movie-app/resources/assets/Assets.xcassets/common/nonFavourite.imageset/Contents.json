@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "not-liked.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -1,0 +1,46 @@
+/* 
+  Localizable.strings
+  movie-app
+
+  Created by Alexander Dominik Somogyi on 2025. 04. 08..
+  
+*/
+
+"genreSection.title" = "Filmek alkalmazás";
+"search.empty.title" = "Kezdj el gépelni\na kereséshez";
+"search.textfield.placeholder" = "Filmek, rendező, színész, színésznő, stb.";
+"button.close.text" = "Bezárás";
+"unexpected.error.title" = "Váratlan hiba";
+"unexpected.error.message" = "Váratlan hiba történt. Kérjük, próbálja meg később.";
+"favouriteMovies.title" = "Kedvencek";
+
+"detail.rate.button" = "Értékeld ezt a filmet";
+"detail.imdb.button" = "Megtekintés az IMDB-n";
+"detail.releaseDate" = "Megjelenés dátuma";
+"detail.runtime" = "Időtartam";
+"detail.language" = "Nyelv";
+"detail.overview" = "Összefoglaló";
+"detail.publishers" = "Kiadók és cégek";
+"detail.cast" = "Szereplők";
+"detail.reviews" = "Top Reviews";
+"detail.similar" = "Similar";
+
+"available" = "Elérhető";
+"unavailable" = "Nem elérhető";
+"noInternet" = "Nincs internetkapcsolat";
+"addReview.subTitle" = "Adj őszinte értékelést";
+"addReview.buttonTitle" = "Küldd el az értékelésem";
+
+"settings.title" = "Beállítások";
+"settings.chooseLanguage" = "Válassz nyelvet";
+"settings.language.english" = "Angol";
+"settings.language.russian" = "Orosz";
+"settings.language.hungarian" = "Magyar";
+"settings.chooseTheme" = "Válassz világos vagy sötét módot";
+"settings.lightmode" = "Világos mód";
+"settings.darkmode" = "Sötét mód";
+"settings.version" = "version: %@";
+
+"app.rate.title" = "Értékeld az alkalmazást!";
+"app.rate.message" = "Sokat segítenél nekünk, ha adnál értékelést!";
+"app.rate.button" = "Rendben";
